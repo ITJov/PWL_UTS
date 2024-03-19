@@ -1,0 +1,9 @@
+php artisan serve : deploy server
+
+composer require laravel/breeze : install breezear
+
+starter/master.blade.php dapet dari admin lte
+
+php artisan make:model (namaModel) : nama dari model
+
+php artisan make:controller (namaRole) --model=(namaModel) : nama dari controller
