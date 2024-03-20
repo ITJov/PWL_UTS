@@ -59,7 +59,9 @@ class kurikulumController extends Controller
      */
     public function edit(kurikulum $kurikulum)
     {
-        //
+        return view('kurikulum.edit' , [
+            'kurikulums' => $kurikulum,
+        ]);
     }
 
     /**
@@ -67,7 +69,15 @@ class kurikulumController extends Controller
      */
     public function update(Request $request, kurikulum $kurikulum)
     {
-        //
+        $validateData = validator($request->all(), [
+            'periode' => 'required|string|max:4',
+        ], [
+            'periode.required' => 'periode harus diisi',
+        ])-> validate();
+
+        $kurikulum->periode = $validateData['periode'];
+        $kurikulum->save();
+        return redirect(route('kurikulum-index'));
     }
 
     /**
@@ -75,6 +85,7 @@ class kurikulumController extends Controller
      */
     public function destroy(kurikulum $kurikulum)
     {
-        //
+        $kurikulum->delete();
+        return redirect(route('kurikulum-index'));
     }
 }

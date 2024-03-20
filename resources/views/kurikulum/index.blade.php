@@ -39,6 +39,10 @@
                         <tr>
                             <td>{{$kurikulum->id}}</td>
                             <td>{{$kurikulum->periode}}</td>
+                            <td>
+                                <a href="{{ route('kurikulum-edit', ['kurikulum' =>$kurikulum->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
+                                <a href="{{ route('kurikulum-delete', ['kurikulum' =>$kurikulum->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

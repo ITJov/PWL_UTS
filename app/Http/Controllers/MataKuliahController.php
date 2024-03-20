@@ -56,7 +56,7 @@ class MataKuliahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(MataKuliah $mataKuliah)
     {
         //
     }
@@ -64,27 +64,44 @@ class MataKuliahController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(MataKuliah $mataKuliah)
     {
-        //
+        return view('mata_kuliah.edit' , [
+            'mk' => $mataKuliah,
+            'kurikulums'=> kurikulum::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update  (Request $request, MataKuliah $mataKuliah)
     {
-        //
+        $validateData = validator($request->all(), [
+            'nama_mata_kuliah' => 'required|string|max:45',
+            'sks' => 'required|string|max:2',
+            'kurikulum_id' => 'required|string|max:10',
+        ], [
+            'nama_mata_kuliah.required' => 'nama mata kuliah keluarga harus diisi',
+        ])-> validate();
+
+        $mataKuliah->nama_mata_kuliah = $validateData['nama_mata_kuliah'];
+        $mataKuliah->sks = $validateData['sks'];
+        $mataKuliah->kurikulum_id = $validateData['kurikulum_id'];
+        $mataKuliah->save();
+        return redirect(route('mk-index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(MataKuliah $mataKuliah)
     {
-        //
+        $mataKuliah->delete();
+        return redirect(route('mk-index'));
     }
     public function tipe()
+
     {
         return $this->belongsTo('App\Models\kurikulum');
     }

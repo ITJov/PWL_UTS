@@ -24,7 +24,7 @@
         <div class="container-fluid">
             <div class="card p-4">
                 <div>
-                    <a href="/kurikulum-create" class="btn btn-primary">Masukan Role</a>
+                    <a href="/role-create" class="btn btn-primary">Add Role</a>
                 </div>
                 <h5 class="card-title">Jenis Role</h5>
                 <table id="table-role" class="table table-striped">

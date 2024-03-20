@@ -32,12 +32,8 @@
                                     <td>{{ $item->kurikulum_id }}</td>
 
                                     <td>
-                                        <a href="" title="view Mata Kuliah"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true">View Mata Kuliah</i></button></a>
-                                        <a href="" title="Edit Mata Kuliah"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit Mata Kuliah</i></button></a>
-
-                                        <form method="POST" action="" accept-charset="UTF-8" style="display:inline">
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Student"></button>
-                                        </form>
+                                        <a href="{{ route('mk-edit', ['mataKuliah' =>$item->kode_mata_kuliah]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
+                                        <a href="{{ route('mk-delete', ['mataKuliah' =>$item->kode_mata_kuliah]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
                                     </td>
                                 </tr>
                                 @endforeach
