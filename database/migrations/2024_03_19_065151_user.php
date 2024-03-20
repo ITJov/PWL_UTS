@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        schema::create('mata_kuliah', function (Blueprint $table)
-        {
-            $table->string('kode_mata_kuliah',5)->unique()->primary();
-            $table->string('nama_mata_kuliah',45)->unique();
-            $table->integer('sks');
-            $table->string('kurikulum_id',2);
-            $table->foreign('kurikulum_id')->references('id')->on('kurikulum');
+        Schema::create('user', function (Blueprint $table) {
+            $table->id()->unique();
+            $table->string('nama_user',100)->unique();
+            $table->text('email');
+            $table->string('role_id',10);
+            $table->foreign('role_id')->references('id')->on('role');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

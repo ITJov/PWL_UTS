@@ -24,9 +24,9 @@ class MataKuliahController extends Controller
      */
     public function create()
     {
-        $data = kurikulum::all();
+
         return view('mata_kuliah.create', [
-            'mk' => $data
+            'mk' => kurikulum::all()
         ]);
     }
 
