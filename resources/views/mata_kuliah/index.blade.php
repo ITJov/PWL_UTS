@@ -33,7 +33,7 @@
 
                                     <td>
                                         <a href="{{ route('mk-edit', ['mataKuliah' =>$item->kode_mata_kuliah]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
-                                        <a href="{{ route('mk-delete', ['mataKuliah' =>$item->kode_mata_kuliah]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
+                                        <a href="{{ route('mk-delete', ['mataKuliah' =>$item->kode_mata_kuliah]) }}" title="Delete"><button class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -45,4 +45,38 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('spc-css')
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+@endsection
+
+@section('spc-js')
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/datatables.bootstrap4.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#table-item').DataTable();
+
+            $('.btn-delete').on('click', function(event) {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin ingin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = $(this).attr('href');
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection

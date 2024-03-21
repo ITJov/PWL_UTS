@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         schema::create('kurikulum', function (Blueprint $table){
-            $table->id()->unique();
-            $table->string('periode',4)->unique();
-            $table->timestamp('updated_at')->useCurrent();
-            $table->timestamp('created_at')->useCurrent();
+            $table->increments('id');
+            $table->string('periode',4);
         });
     }
 

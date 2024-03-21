@@ -45,6 +45,9 @@ Route::get('mk-delete/{mataKuliah}', [MataKuliahController::class, 'destroy'])->
 Route::get("role", [roleController::class, 'index'])->name('role-index');
 Route::get("role-create", [roleController::class, 'create'])->name('role-create');
 Route::post("role-store", [roleController::class, 'store'])->name('role-store');
+Route::get('role-edit/{role}', [roleController::class, 'edit'])->name('role-edit');
+Route::post('role-edit/{role}', [roleController::class, 'update'])->name('role-update');
+Route::get('role-delete/{role}', [roleController::class, 'destroy'])->name('role-delete');
 
 // Kurikulum
 Route::get("kurikulum", [kurikulumController::class, 'index'])->name('kurikulum-index');
