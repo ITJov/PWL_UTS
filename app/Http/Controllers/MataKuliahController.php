@@ -100,10 +100,5 @@ class MataKuliahController extends Controller
         $mataKuliah->delete();
         return redirect(route('mk-index'));
     }
-    public function tipe()
-
-    {
-        return $this->belongsTo('App\Models\kurikulum');
-    }
 
 }

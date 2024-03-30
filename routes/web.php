@@ -18,10 +18,12 @@ use App\Http\Controllers\roleController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('home', function () {
+    return view('home');
+});
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
@@ -59,7 +61,8 @@ Route::post('kurikulum-edit/{kurikulum}', [kurikulumController::class, 'update']
 Route::get('kurikulum-delete/{kurikulum}', [kurikulumController::class, 'destroy'])->name('kurikulum-delete');
 
 Route::get("user", [userController::class, 'index'])->name('user-index');
-
-Route::get('/', function () {
-    return view('home');
-});
+Route::get("user-create", [userController::class, 'create'])->name('user-create');
+Route::post("user-store", [userController::class, 'store'])->name('user-store');
+Route::get('user-edit/{pengguna}', [userController::class, 'edit'])->name('user-edit');
+Route::post('user-edit/{pengguna}', [userController::class, 'update'])->name('user-update');
+Route::get('user-delete/{pengguna}', [userController::class, 'destroy'])->name('user-delete');

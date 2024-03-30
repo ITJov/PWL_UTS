@@ -15,8 +15,13 @@ class Pengguna extends Model
         'namaUser',
         'email',
         'password',
-        'role'
+        'role_id'
     ];
+
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+    protected $primaryKey = 'id';
 
     public $incrementing =false;
     protected $keyType='string';
