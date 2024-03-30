@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
-            $table->id()->unique();
+        Schema::create('role', function (Blueprint $table) {
+            $table->string('id',5)->primary();
             $table->string('nama_role',45)->unique();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();

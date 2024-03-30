@@ -16,4 +16,7 @@ class kurikulum extends Model
         'periode',
     ];
 
+    public $incrementing =false;
+    protected $keyType='string';
+
 }

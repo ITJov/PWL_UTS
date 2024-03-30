@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class role extends Model
+class Pengguna extends Model
 {
     use HasFactory;
-
-    protected $table ='role';
+    protected $table ='user';
 
     protected $fillable =[
-      'id',
-      'nama_role',
+        'id',
+        'namaUser',
+        'email',
+        'password',
+        'role'
     ];
+
     public $incrementing =false;
     protected $keyType='string';
 }

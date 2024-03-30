@@ -15,7 +15,7 @@ class MataKuliahController extends Controller
     {
         $data = MataKuliah::all();
         return view('mata_kuliah.index', [
-            'mk' => $data
+            'mks' => $data
         ]);
     }
 

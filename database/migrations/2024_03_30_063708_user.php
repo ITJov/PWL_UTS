@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('polling_date',function(Blueprint $table){
-            $table->id()->unique();
-            $table->string('polling_id');
-            $table->foreign('polling_id')->references('id')->on('polling');
-            $table->string('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
-            $table->string('mata_kuliah_id');
-            $table->foreign('mata_kuliah_id')->references('kode_mata_kuliah')->on('mata_kuliah');
+        Schema::create('user', function (Blueprint $table) {
+            $table->string('id',5)->primary();
+            $table->string('nama_user',100)->unique();
+            $table->text('email');
+            $table->string('password');
+            $table->string('role_id',5);
+            $table->foreign('role_id')->references('id')->on('role');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

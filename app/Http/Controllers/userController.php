@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengguna_user;
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
 
-class controllerUser extends Controller
+class userController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = Pengguna::all();
+        return view('user.index', [
+            'users' => $data
+        ]);
     }
 
     /**
@@ -34,7 +37,7 @@ class controllerUser extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pengguna_user $pengguna_user)
+    public function show(Pengguna_ $pengguna_user)
     {
         //
     }
@@ -42,7 +45,7 @@ class controllerUser extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pengguna_user $pengguna_user)
+    public function edit(Pengguna_ $pengguna_user)
     {
         //
     }
@@ -50,7 +53,7 @@ class controllerUser extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pengguna_user $pengguna_user)
+    public function update(Request $request, Pengguna_ $pengguna_user)
     {
         //
     }
@@ -58,7 +61,7 @@ class controllerUser extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pengguna_user $pengguna_user)
+    public function destroy(Pengguna_ $pengguna_user)
     {
         //
     }

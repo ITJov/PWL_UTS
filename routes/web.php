@@ -4,7 +4,8 @@ use App\Http\Controllers\kurikulumController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roleController;
-use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\userController;
+    use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::get('mk-delete/{mataKuliah}', [MataKuliahController::class, 'destroy'])->
 Route::get("role", [roleController::class, 'index'])->name('role-index');
 Route::get("role-create", [roleController::class, 'create'])->name('role-create');
 Route::post("role-store", [roleController::class, 'store'])->name('role-store');
+Route::get('role-edit/{role}', [roleController::class,'edit'])->name('role-edit');
+Route::post('role-edit/{role}', [roleController::class, 'update'])->name('role-update');
+Route::get('role-delete/{role}', [roleController::class, 'destroy'])->name('role-delete');
 
 // Kurikulum
 Route::get("kurikulum", [kurikulumController::class, 'index'])->name('kurikulum-index');
@@ -54,6 +58,7 @@ Route::get('kurikulum-edit/{kurikulum}', [kurikulumController::class, 'edit'])->
 Route::post('kurikulum-edit/{kurikulum}', [kurikulumController::class, 'update'])->name('kurikulum-update');
 Route::get('kurikulum-delete/{kurikulum}', [kurikulumController::class, 'destroy'])->name('kurikulum-delete');
 
+Route::get("user", [userController::class, 'index'])->name('user-index');
 
 Route::get('/', function () {
     return view('home');

@@ -18,40 +18,49 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
+    <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
                 <div>
-                    <a href="{{ route('mk-create') }}" class="btn btn-primary" title="Add Mata Kuliah">
-                        Add mata kuliah
-                    </a>
+                    <a href="/role-create" class="btn btn-primary">Masukan Role</a>
                 </div>
-                <h5 class="card-title">Polling Mata Kuliah</h5>
+                <h5 class="card-title">Jenis Role</h5>
                 <table id="table-role" class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Kode Mata Kuliah</th>
-                        <th>Nama Mata Kuliah</th>
-                        <th>SKS</th>
-                        <th>Kurikulum_id</th>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($mks as $mk)
+                    @foreach($users as $user)
                         <tr>
-                            <td>{{ $mk->kode_mata_kuliah}}</td>
-                            <td>{{ $mk->nama_mata_kuliah }}</td>
-                            <td>{{ $mk->sks }}</td>
-                            <td>{{ $mk->kurikulum_id }}</td>
-                            <td>
-                                <a href="{{ route('mk-edit', ['mataKuliah' =>$mk->kode_mata_kuliah]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
-                                <a href="{{ route('mk-delete', ['mataKuliah' =>$mk->kode_mata_kuliah]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
-                            </td>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->namaUser}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->role}}</td>
+{{--                            <td>--}}
+{{--                                <a href="{{ route('role-edit', ['role' =>$role->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>--}}
+{{--                                <a href="{{ route('role-delete', ['role' =>$role->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>--}}
+{{--                            </td>--}}
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content -->
+@endsection
+
+@section('spc-css')
+
+@endsection
+
+@section('spc-js')
+
 @endsection

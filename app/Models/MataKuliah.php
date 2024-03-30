@@ -18,4 +18,7 @@ class MataKuliah extends Model
     ];
     protected $primaryKey = 'kode_mata_kuliah';
 
+    public $incrementing =false;
+    protected $keyType='string';
+
 }
