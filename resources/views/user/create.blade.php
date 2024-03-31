@@ -39,7 +39,7 @@
                             <label for="namaUser">Nama User</label>
                             <input type="text" class="form-control" id="namaUser"
                                    placeholder="Nama User"
-                                   required name="namaUser" maxlength="40" >
+                                   required name="name" maxlength="40" >
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label for="idRole">Role</label>
-                            <select class="form-control" id="idRole" name="role_id"  required>
+                            <select class="form-control" id="idRole" name="role"  required>
                                 <option value="" disabled selected> Select your option</option>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->id }}

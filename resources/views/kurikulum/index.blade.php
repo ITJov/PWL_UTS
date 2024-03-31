@@ -23,9 +23,11 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
+                @if(Auth::user()->namaRole->nama_role=='Admin')
                 <div>
                     <a href="/kurikulum-create" class="btn btn-primary">Masukan Kurikulum</a>
                 </div>
+                @endif
                 <h5 class="card-title">Kurikulum yang digunakan</h5>
                 <table id="table-role" class="table table-striped">
                     <thead>
@@ -39,10 +41,12 @@
                         <tr>
                             <td>{{$kurikulum->id}}</td>
                             <td>{{$kurikulum->periode}}</td>
+                            @if(Auth::user()->namaRole->nama_role=='Admin')
                             <td>
                                 <a href="{{ route('kurikulum-edit', ['kurikulum' =>$kurikulum->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
                                 <a href="{{ route('kurikulum-delete', ['kurikulum' =>$kurikulum->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
                             </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>

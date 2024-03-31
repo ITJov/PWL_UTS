@@ -21,11 +21,13 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
+                @if(Auth::user()->namaRole->nama_role=='Admin')
                 <div>
                     <a href="{{ route('mk-create') }}" class="btn btn-primary" title="Add Mata Kuliah">
                         Add mata kuliah
                     </a>
                 </div>
+                @endif
                 <h5 class="card-title">Polling Mata Kuliah</h5>
                 <table id="table-role" class="table table-striped">
                     <thead>
@@ -43,10 +45,12 @@
                             <td>{{ $mk->nama_mata_kuliah }}</td>
                             <td>{{ $mk->sks }}</td>
                             <td>{{ $mk->kurikulum_id }}</td>
+                            @if(Auth::user()->namaRole->nama_role=='Admin')
                             <td>
                                 <a href="{{ route('mk-edit', ['mataKuliah' =>$mk->kode_mata_kuliah]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
                                 <a href="{{ route('mk-delete', ['mataKuliah' =>$mk->kode_mata_kuliah]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
                             </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
