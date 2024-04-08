@@ -18,37 +18,37 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
+    <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
 {{--                @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                 <div>
-                    <a href="{{ route('mk-create') }}" class="btn btn-primary" title="Add Mata Kuliah">
-                        Add mata kuliah
-                    </a>
+                    <a href="/pole-create" class="btn btn-primary">Masukan Polling</a>
                 </div>
 {{--                @endif--}}
-                <h5 class="card-title">Polling Mata Kuliah</h5>
+                <h5 class="card-title">Rentang Polling</h5>
                 <table id="table-role" class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Kode Mata Kuliah</th>
-                        <th>Nama Mata Kuliah</th>
-                        <th>SKS</th>
-                        <th>Kurikulum_id</th>
+                        <th>ID</th>
+                        <th>Semester</th>
+                        <th>Tanggal Mulai</th>
+                        <th>Tanggal Berakhir</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($mks as $mk)
+                    @foreach($poles as $pole)
                         <tr>
-                            <td>{{ $mk->kode_mata_kuliah}}</td>
-                            <td>{{ $mk->nama_mata_kuliah }}</td>
-                            <td>{{ $mk->sks }}</td>
-                            <td>{{ $mk->kurikulum_id }}</td>
+                            <td>{{$pole->id}}</td>
+                            <td>{{$pole->semester}}</td>
+                            <td>{{date('d-m-Y H:i:s', strtotime($pole->tanggal_mulai))}}</td>
+                            <td>{{date('d-m-Y H:i:s', strtotime($pole->tanggal_selesai))}}</td>
 {{--                            @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                             <td>
-                                <a href="{{ route('mk-edit', ['mataKuliah' =>$mk->kode_mata_kuliah]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
-                                <a href="{{ route('mk-delete', ['mataKuliah' =>$mk->kode_mata_kuliah]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
+                                <a href="{{ route('pole-edit', ['polling' =>$pole->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
+                                <a href="{{ route('pole-delete', ['polling' =>$pole->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
                             </td>
 {{--                            @endif--}}
                         </tr>
@@ -56,6 +56,15 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content -->
+@endsection
+
+@section('spc-css')
+
+@endsection
+
+@section('spc-js')
+
 @endsection

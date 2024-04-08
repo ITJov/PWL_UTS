@@ -13,7 +13,7 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">Jangan Lupa diganti</a>
             </div>
         </div>
 
@@ -65,6 +65,12 @@
                             <a href="user" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pole" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pole</p>
                             </a>
                         </li>
                         <li class="nav-item">

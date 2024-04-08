@@ -1,8 +1,10 @@
-    <?php
+<?php
 
-    use App\Http\Controllers\adminController;
+use App\Http\Controllers\adminController;
+    use App\Http\Controllers\Auth\AuthenticatedSessionController;
     use App\Http\Controllers\kurikulumController;
 use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\pollingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roleController;
     use App\Http\Controllers\sesiController;
@@ -35,11 +37,11 @@ Route::get('home', function () {
 //
 //    Route::get('logout',[sesiController::class,'logout']);
 //});
-
+//
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
 
@@ -49,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+//Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -67,10 +69,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/unauthorized', function () {
         return view('unauthorized');
     })->name('unauthorized');
-    Route::get("logout", [userController::class, 'logout'])->name('logout');
-});
+    Route::get("logout", [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-Route::middleware(['auth','userAkses:1'])->group(function () {
+
+//});
+
+//Route::middleware(['auth','userAkses:1'])->group(function () {
     //Mata Kuliah
     Route::get('mk-create', [MataKuliahController::class, 'create'])->name('mk-create');
     Route::post('mk-store', [MataKuliahController::class, 'store'])->name('mk-store');
@@ -98,6 +102,13 @@ Route::middleware(['auth','userAkses:1'])->group(function () {
     Route::get('user-edit/{pengguna}', [userController::class, 'edit'])->name('user-edit');
     Route::post('user-edit/{pengguna}', [userController::class, 'update'])->name('user-update');
     Route::get('user-delete/{pengguna}', [userController::class, 'destroy'])->name('user-delete');
-});
+//});
+
+Route::get("pole", [pollingController::class, 'index'])->name('pole-index');
+Route::get("pole-create", [pollingController::class, 'create'])->name('pole-create');
+Route::post("pole-store", [pollingController::class, 'store'])->name('pole-store');
+Route::get('pole-edit/{polling}', [pollingController::class, 'edit'])->name('pole-edit');
+Route::post('pole-edit/{polling}', [pollingController::class, 'update'])->name('pole-update');
+Route::get('pole-delete/{polling}', [pollingController::class, 'destroy'])->name('pole-delete');
 
 require __DIR__.'/auth.php';

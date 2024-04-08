@@ -25,38 +25,34 @@
                     <div class="alert alert-danger">
                         {{implode('',$errors->all(':message'))}}
                     </div>
+                    <br>
                 @endif
-                <form method="post" action="{{route('user-update', ['pengguna' => $users->id])}}">
+                <form method="post" action="{{route('pole-store')}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="kodeUser">ID User</label>
-                            <input type="text" class="form-control" id="kodeUser"
-                                   placeholder="Kode User" name="id" value="{{ value($users->id) }}"
-                                   readonly autofocus maxlength="10">
+                            <label for="idPolling">ID Polling</label>
+                            <input type="text" class="form-control" id="idPolling"
+                                   placeholder="ID Polling" name="id"
+                                   required autofocus maxlength="10">
                         </div>
                         <div class="form-group">
-                            <label for="namaUser">Nama User</label>
-                            <input type="text" class="form-control" id="namaUser"
-                                   placeholder="Nama User"
-                                   required name="name" maxlength="40" value="{{ value($users->name) }}">
+                            <label for="semester">Semester</label>
+                            <input type="text" class="form-control" id="semester"
+                                   placeholder="Masukan semester"
+                                   required name="semester" maxlength="2" >
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email"
-                                   placeholder="##"
-                                   required name="email" value="{{ value($users->email) }}">
+                            <label for="tanggal_mulai">Tanggal Mulai</label>
+                            <input type="datetime-local" class="form-control" id="tanggal_mulai"
+                                   required name="tanggal_mulai">
                         </div>
                         <div class="form-group">
-                            <label for="idRole">Role</label>
-                            <select class="form-control" id="idRole" name="role" required>
-                                @foreach($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->id }}
-                                        - {{ $role->nama_role }}</option>
-                                @endforeach
-                            </select>
+                            <label for="tanggal_selesai">Tanggal Akhir</label>
+                            <input type="datetime-local" class="form-control" id="tanggal_selesai"
+                                   required name="tanggal_selesai">
+                        </div>
 
-                        </div>
                         <button type="submit" class="btn btn-info">Submit</button>
                     </div>
                 </form>
