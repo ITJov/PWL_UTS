@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\kurikulum;
 use App\Models\role;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class kurikulumController extends Controller
 {
@@ -33,15 +35,16 @@ class kurikulumController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(),[
-            'id'=>'required|string|max:10|unique:kurikulum',
-            'periode'=>'required|string|max:4',
+            'periode'=>'required|string|max:4|unique:kurikulum',
         ],[
-            'id.required' => 'Kurikulum ID keluarga harus diisi',
-            'id.unique' => 'Kurikulum ID sudah terdaftar, silahkan diganti dengan nomor lain',
             'periode.required' => 'Nama Kurikulum harus diisi',
+            'periode.unique' => 'Periode sudah terdaftar, silahkan diganti',
         ])-> validate();
 
+        $id = IdGenerator::generate(['table' => 'kurikulum', 'length' => 10, 'prefix' =>'KRKM-']);
+
         $kurikulum = new kurikulum($validateData);
+        $kurikulum->id=$id;
         $kurikulum->save();
         return redirect(route('kurikulum-index'));
     }
@@ -70,9 +73,10 @@ class kurikulumController extends Controller
     public function update(Request $request, kurikulum $kurikulum)
     {
         $validateData = validator($request->all(), [
-            'periode' => 'required|string|max:4',
+            'periode' => ['required','max:4',Rule::unique('kurikulum')->ignore($kurikulum->id),],
         ], [
             'periode.required' => 'periode harus diisi',
+            'periode.unique' => 'Periode sudah terdaftar, silahkan diganti',
         ])-> validate();
 
         $kurikulum->periode = $validateData['periode'];

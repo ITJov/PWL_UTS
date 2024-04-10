@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Poling;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -37,19 +39,20 @@ class pollingController extends Controller
     {
 //        dd($request);
         $validateData = validator($request->all(),[
-            'id'=>'required|string|max:10|unique:polling',
-            'semester'=>'required|string',
+            'semester'=>'required|int|unique:polling',
             'tanggal_mulai'=>'required',
             'tanggal_selesai'=>'required',
         ],[
-            'id.required' => 'ID Polling harus diisi',
-            'id.unique' => 'ID sudah terdaftar, silahkan diganti dengan nomor lain',
             'semester.required' => 'Semester harus diisi',
+            'semester.unique' => 'Semester sudah pernah ditambahkan, silahkan cek kembali',
             'tanggal_mulai.required'=> 'Tanggal Mulai belum diisi',
             'tanggal_selesai.required'=> 'Tanggal Akhir belum diisi',
         ])-> validate();
 
+        $id = IdGenerator::generate(['table' => 'polling', 'length' => 10, 'prefix' =>'PL-']);
+
         $pole = new Poling($validateData);
+        $pole->id=$id;
         $pole->save();
         return redirect(route('pole-index'));
     }
@@ -78,14 +81,15 @@ class pollingController extends Controller
     public function update(Request $request, Poling $polling)
     {
         $validateData = validator($request->all(), [
-            'id'=>'required|string|max:10',
-            'semester'=>'required|string',
+            'id'=>['required','max:10',Rule::unique('polling')->ignore($polling->id),],
+            'semester'=>['required',Rule::unique('polling')->ignore($polling->id),],
             'tanggal_mulai'=>'required',
             'tanggal_selesai'=>'required',
         ], [
             'id.required' => 'ID Polling harus diisi',
             'id.unique' => 'ID sudah terdaftar, silahkan diganti dengan nomor lain',
             'semester.required' => 'Semester harus diisi',
+            'semester.unique' => 'Semester sudah pernah ditambahkan, silahkan cek kembali',
             'tanggal_mulai.required'=> 'Tanggal Mulai belum diisi',
             'tanggal_selesai.required'=> 'Tanggal Akhir belum diisi',
         ])-> validate();

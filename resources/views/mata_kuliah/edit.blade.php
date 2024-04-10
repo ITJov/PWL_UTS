@@ -26,13 +26,13 @@
                         {{implode('',$errors->all(':message'))}}
                     </div>
                 @endif
-                <form method="post" action="{{route('mk-update', ['mataKuliah' => $mk->kode_mata_kuliah])}}">
+                <form method="post" action="{{route('mk-update', ['mataKuliah' => $mk->id])}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="kodeMatKul">ID</label>
                             <input type="text" class="form-control" id="kodeMatKul"
-                                   placeholder="Kode Mata Kuliah" name="kode_mata_kuliah" value="{{ value($mk->kode_mata_kuliah) }}"
+                                   placeholder="Kode Mata Kuliah" name="id" value="{{ value($mk->id) }}"
                                    readonly autofocus maxlength="10">
                         </div>
                         <div class="form-group">

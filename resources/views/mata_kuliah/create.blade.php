@@ -30,12 +30,6 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="kodeMatKul">ID</label>
-                            <input type="text" class="form-control" id="kodeMatKul"
-                                   placeholder="Kode Mata Kuliah" name="kode_mata_kuliah"
-                                   required autofocus maxlength="10">
-                        </div>
-                        <div class="form-group">
                             <label for="namaMatKul">Nama Mata Kuliah</label>
                             <input type="text" class="form-control" id="namaMatKul"
                                    placeholder="Nama Mata Kuliah"

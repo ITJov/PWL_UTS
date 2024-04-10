@@ -32,11 +32,6 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="role-id">ID</label>
-                            <input type="text" class="form-control" id="role-id" placeholder="Id Role" name="id"
-                                   required autofocus maxlength="10">
-                        </div>
-                        <div class="form-group">
                             <label for="nama-role">Nama Role</label>
                             <input type="text" maxlength="40" class="form-control" id="nama-role" placeholder="Nama Role"
                                    required name="nama_role">

@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('polling_date',function(Blueprint $table){
-            $table->string('id')->unique()->primary();
+            $table->string('id',10)->unique()->primary();
             $table->string('polling_id');
             $table->foreign('polling_id')->references('id')->on('polling');
             $table->string('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('mata_kuliah_id');
-            $table->foreign('mata_kuliah_id')->references('kode_mata_kuliah')->on('mata_kuliah');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

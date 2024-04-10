@@ -5,6 +5,7 @@ use App\Http\Controllers\adminController;
     use App\Http\Controllers\kurikulumController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\pollingController;
+use App\Http\Controllers\pollingDetailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roleController;
     use App\Http\Controllers\sesiController;
@@ -110,5 +111,12 @@ Route::post("pole-store", [pollingController::class, 'store'])->name('pole-store
 Route::get('pole-edit/{polling}', [pollingController::class, 'edit'])->name('pole-edit');
 Route::post('pole-edit/{polling}', [pollingController::class, 'update'])->name('pole-update');
 Route::get('pole-delete/{polling}', [pollingController::class, 'destroy'])->name('pole-delete');
+
+Route::get("poleDetail", [pollingDetailController::class, 'index'])->name('poleDetail-index');
+Route::get("poleDetail-create", [pollingDetailController::class, 'create'])->name('poleDetail-create');
+Route::post("poleDetail-store", [pollingDetailController::class, 'store'])->name('poleDetail-store');
+Route::get('poleDetail-edit/{pollingDetail}', [pollingDetailController::class, 'edit'])->name('poleDetail-edit');
+Route::post('poleDetail-edit/{pollingDetail}', [pollingDetailController::class, 'update'])->name('poleDetail-update');
+Route::get('poleDetail-delete/{pollingDetail}', [pollingDetailController::class, 'destroy'])->name('poleDetail-delete');
 
 require __DIR__.'/auth.php';

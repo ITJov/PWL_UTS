@@ -14,6 +14,7 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">Jangan Lupa diganti</a>
+{{--                {{Auth::user()->name}}--}}
             </div>
         </div>
 
@@ -71,6 +72,12 @@
                             <a href="pole" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pole</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="poleDetail" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pemilihan</p>
                             </a>
                         </li>
                         <li class="nav-item">

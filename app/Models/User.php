@@ -45,6 +45,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $primaryKey = 'id';
+    public $incrementing =false;
+    protected $keyType='string';
+
     public function namaRole(){
         return $this->belongsTo(role::class,'role');
     }

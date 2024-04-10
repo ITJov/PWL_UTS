@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('email');
             $table->string('password');
             $table->string('role_id',5);
-            $table->foreign('role_id')->references('id')->on('role');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

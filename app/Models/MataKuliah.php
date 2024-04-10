@@ -11,14 +11,18 @@ class MataKuliah extends Model
     protected $table = 'mata_kuliah';
 
     protected $fillable = [
-        'kode_mata_kuliah',
+        'id',
         'nama_mata_kuliah',
         'sks',
         'kurikulum_id',
     ];
-    protected $primaryKey = 'kode_mata_kuliah';
+    protected $primaryKey = 'id';
 
     public $incrementing =false;
     protected $keyType='string';
+
+    public function namaKurikulum(){
+        return $this->belongsTo(kurikulum::class,'kurikulum_id');
+    }
 
 }

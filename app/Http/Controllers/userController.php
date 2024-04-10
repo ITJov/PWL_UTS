@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengguna;
 use App\Models\role;
 use App\Models\User;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -39,7 +40,6 @@ class userController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(),[
-            'id'=>'required|string|max:10',
             'name'=>'required|string|max:40|unique:users',
             'password'=>'required|string',
             'email'=>'required|string',
@@ -51,7 +51,10 @@ class userController extends Controller
             'email.required'=> 'Email harus diisi',
         ])->validate();
 
+        $id = IdGenerator::generate(['table' => 'users', 'length' => 10, 'prefix' =>'PGN-']);
+
         $user=new User($validateData);
+        $user->id=$id;
         $user->save();
         return redirect(route('user-index'));
     }

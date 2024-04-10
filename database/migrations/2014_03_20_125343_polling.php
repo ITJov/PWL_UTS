@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('polling',function(Blueprint $table){
-            $table->string('id',5)->unique()->primary();
+            $table->string('id',10)->unique()->primary();
             $table->string('semester',2);
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');

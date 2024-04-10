@@ -31,12 +31,6 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="idPolling">ID Polling</label>
-                            <input type="text" class="form-control" id="idPolling"
-                                   placeholder="ID Polling" name="id"
-                                   required autofocus maxlength="10">
-                        </div>
-                        <div class="form-group">
                             <label for="semester">Semester</label>
                             <input type="text" class="form-control" id="semester"
                                    placeholder="Masukan semester"

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\kurikulum;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use App\Models\MataKuliah;
+use Illuminate\Validation\Rule;
 
 class MataKuliahController extends Controller
 {
@@ -24,7 +26,6 @@ class MataKuliahController extends Controller
      */
     public function create()
     {
-
         return view('mata_kuliah.create', [
             'mk' => kurikulum::all()
         ]);
@@ -36,19 +37,20 @@ class MataKuliahController extends Controller
     public function store(Request $request)
     {
       $validateData = validator($request->all(),[
-            'kode_mata_kuliah'=>'required|string|max:10|unique:mata_kuliah',
-            'nama_mata_kuliah'=>'required|string|max:40',
+            'nama_mata_kuliah'=>'required|string|max:40|unique:mata_kuliah',
             'sks'=>'required|string|max:2',
             'kurikulum_id'=>'required|string|max:40',
         ],[
-            'kode_mata_kuliah.required' => 'Kode Mata kuliah harus diisi',
-            'kode_mata_kuliah.unique' => 'Kode Mata kuliah sudah terdaftar, silahkan diganti dengan nomor lain',
             'nama_mata_kuliah.required' => 'Nama Mata Kuliah harus diisi',
+            'nama_mata_kuliah.unique' => 'Nama Mata kuliah sudah terdaftar, silahkan diganti dengan mata kuliah lain',
             'sks.required' => 'Jumlah SKS harus diisi',
             'kurikulum_id.required' => 'Kurikulum harus diisi',
         ])-> validate();
 
+        $id = IdGenerator::generate(['table' => 'mata_kuliah', 'length' => 10, 'prefix' =>'MK-']);
+
         $matKul = new MataKuliah($validateData);
+        $matKul->id = $id;
         $matKul->save();
         return redirect(route('mk-index'))->with('flash_message', 'Mata Kuliah ditambahkan');
     }
@@ -78,11 +80,12 @@ class MataKuliahController extends Controller
     public function update  (Request $request, MataKuliah $mataKuliah)
     {
         $validateData = validator($request->all(), [
-            'nama_mata_kuliah' => 'required|string|max:45',
+            'nama_mata_kuliah' => ['required','max:45',Rule::unique('mata_kuliah')->ignore($mataKuliah->id),],
             'sks' => 'required|string|max:2',
             'kurikulum_id' => 'required|string|max:10',
         ], [
-            'nama_mata_kuliah.required' => 'nama mata kuliah keluarga harus diisi',
+            'nama_mata_kuliah.required' => 'Nama mata kuliah harus diisi',
+            'nama_mata_kuliah.unique' => 'Nama mata kuliah sudah pernah didaftarkan',
         ])-> validate();
 
         $mataKuliah->nama_mata_kuliah = $validateData['nama_mata_kuliah'];
