@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('polling',function(Blueprint $table){
             $table->string('id',10)->unique()->primary();
-            $table->string('semester',2);
+            $table->string('periode')->unique();
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
             $table->timestamp('updated_at')->useCurrent();

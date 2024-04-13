@@ -14,7 +14,7 @@ return new class extends Migration
         schema::create('mata_kuliah', function (Blueprint $table)
         {
             $table->string('id',10)->unique()->primary();
-            $table->string('nama_mata_kuliah',45)->unique();
+            $table->string('nama_mata_kuliah',45);
             $table->integer('sks');
             $table->string('kurikulum_id',10);
             $table->foreign('kurikulum_id')->references('id')->on('kurikulum');

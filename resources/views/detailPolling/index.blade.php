@@ -23,6 +23,11 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
+                @if(session('message'))
+                    <div class="alert alert-danger">
+                        {{ session('message') }}
+                    </div>
+                @endif
 {{--                @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                 <div>
                     <a href="/poleDetail-create" class="btn btn-primary">Lakukan Polling</a>
@@ -33,7 +38,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Id Polling</th>
+                        <th>Kurikulum</th>
                         <th>Id User</th>
                         <th>Mata Kuliah yang Dipilih</th>
                     </tr>
@@ -43,17 +48,9 @@
                         <tr>
 
                             <td>{{$poleDetail->id}}</td>
-                            <td>{{$poleDetail->namaPole->semester}}</td>
+                            <td>{{$poleDetail->namaPole->periode}}</td>
                             <td>{{$poleDetail->namaUser->name}}</td>
-                            <td>
-                                @php
-                                    $mks=json_decode($poleDetail->mata_kuliah_id)
-                                @endphp
-                                @foreach($mks as $mk)
-                                    {{$mk}}
-                                    <br>
-                                @endforeach
-                            </td>
+                            <td>{{$poleDetail->namaMatKul->nama_mata_kuliah }}</td>
 {{--                            @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                             <td>
                                 <a href="{{ route('poleDetail-edit', ['pollingDetail' =>$poleDetail->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>

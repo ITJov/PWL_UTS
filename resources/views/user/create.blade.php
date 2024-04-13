@@ -29,12 +29,6 @@
                 <form method="post" action="{{route('user-store')}}">
                     @csrf
                     <div class="card-body">
-{{--                        <div class="form-group">--}}
-{{--                            <label for="kodeUser">ID User</label>--}}
-{{--                            <input type="text" class="form-control" id="kodeUser"--}}
-{{--                                   placeholder="Kode User" name="id"--}}
-{{--                                   required autofocus maxlength="10">--}}
-{{--                        </div>--}}
                         <div class="form-group">
                             <label for="namaUser">Nama User</label>
                             <input type="text" class="form-control" id="namaUser"

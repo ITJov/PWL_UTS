@@ -71,7 +71,7 @@
                         <li class="nav-item">
                             <a href="pole" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Pole</p>
+                                <p> Waktu Pole</p>
                             </a>
                         </li>
                         <li class="nav-item">

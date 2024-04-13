@@ -100,6 +100,10 @@ Route::middleware('auth')->group(function () {
     //user
     Route::get("user-create", [userController::class, 'create'])->name('user-create');
     Route::post("user-store", [userController::class, 'store'])->name('user-store');
+    //    menammbahkan kurikulum untuk user
+    Route::get("addKurikulumUser/{pengguna}", [userController::class, 'addKurikulum'])->name('addKurikulumUser');
+    Route::post('addKurikulumUser/{pengguna}', [userController::class, 'storeKurikulum'])->name('storeKurikulum');
+
     Route::get('user-edit/{pengguna}', [userController::class, 'edit'])->name('user-edit');
     Route::post('user-edit/{pengguna}', [userController::class, 'update'])->name('user-update');
     Route::get('user-delete/{pengguna}', [userController::class, 'destroy'])->name('user-delete');

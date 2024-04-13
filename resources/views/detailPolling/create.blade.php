@@ -28,24 +28,9 @@
                         {{implode('',$errors->all(':message'))}}
                     </div>
                 @endif
+                <h3 class="card-title">Poling</h3>
                 <form method="post" action="{{route('poleDetail-store')}}">
                     @csrf
-{{--                    <div class="form-group">--}}
-{{--                        <label for="idPoling">ID</label>--}}
-{{--                        <input type="text" class="form-control" id="idPoling"--}}
-{{--                               placeholder="Id Polling" name="idPoling"--}}
-{{--                               required autofocus maxlength="10">--}}
-{{--                    </div>--}}
-                    <div class="form-group">
-                        <label for="idPole">Semester yang dipilih</label>
-                        <select class="form-control" id="idPole" name="polling_id"  required>
-                            <option value="" disabled selected> Select your option</option>
-                            @foreach($poles as $pole)
-                                <option value="{{ $pole->id }}">Semester
-                                    - {{ $pole->semester }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     <table id="table-role" class="table table-striped">
                         <thead>
                         <tr>
@@ -57,15 +42,17 @@
                         </thead>
                         <tbody>
                             @foreach($mks as $mk)
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" id="mata_kuliah_id" name="mk[]"
-                                               value="{{$mk->id}}">
-                                    </td>
-                                    <td>{{$mk->id}}</td>
-                                    <td>{{$mk->nama_mata_kuliah}}</td>
-                                    <td>{{$mk->sks}}</td>
-                                </tr>
+                                @if(Auth::user()->kurikulum == $mk->kurikulum_id)
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="mata_kuliah_id" name="mk[]"
+                                                   value="{{$mk->id}}">
+                                        </td>
+                                        <td>{{$mk->id}}</td>
+                                        <td>{{$mk->nama_mata_kuliah}}</td>
+                                        <td>{{$mk->sks}}</td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

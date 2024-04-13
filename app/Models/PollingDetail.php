@@ -26,9 +26,11 @@ class PollingDetail extends Model
     public function namaPole(){
         return $this->belongsTo(Poling::class,'polling_id');
     }
-
     public function namaUser(){
         return $this->belongsTo(User::class,'user_id');
+    }
+    public function namaMatKul(){
+        return $this->belongsTo(MataKuliah::class,'mata_kuliah_id');
     }
 
 }

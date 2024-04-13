@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label for="idRole">Role</label>
-                            <select class="form-control" id="idRole" name="role" required>
+                            <select class="form-control" id="idRole" name="role" required >
                                 @foreach($roles as $role)
                                     @if($role->id == $users->role)
                                         <option selected value="{{ $role->id }}">{{ $role->id }}
@@ -60,7 +60,21 @@
                                     @endif
                                 @endforeach
                             </select>
-
+                        </div>
+                        <div class="form-group">
+                            <label for="kurikulum">Kurikulum</label>
+                            <select class="form-control" id="kurikulum" name="kurikulum">
+                                <option value="">Kurikulum untuk selain User</option>
+                                @foreach($kurikulums as $kurikulum)
+                                    @if($kurikulum->id == $users->kurikulum)
+                                        <option selected value="{{ $kurikulum->id }}">Tahun
+                                            - {{ $kurikulum->periode }}</option>
+                                    @else
+                                        <option value="{{ $kurikulum->id }}">Tahun
+                                            - {{ $kurikulum->periode }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-info">Submit</button>
                     </div>

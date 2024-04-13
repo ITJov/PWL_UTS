@@ -33,6 +33,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Untuk <br> Periode</th>
                         <th>Semester</th>
                         <th>Tanggal Mulai</th>
                         <th>Tanggal Berakhir</th>
@@ -42,7 +43,8 @@
                     @foreach($poles as $pole)
                         <tr>
                             <td>{{$pole->id}}</td>
-                            <td>{{$pole->semester}}</td>
+                            <td>{{$pole->periode}}</td>
+{{--                            <td>{{$pole->semester}}</td>--}}
                             <td>{{date('d-m-Y H:i:s', strtotime($pole->tanggal_mulai))}}</td>
                             <td>{{date('d-m-Y H:i:s', strtotime($pole->tanggal_selesai))}}</td>
 {{--                            @if(Auth::user()->namaRole->nama_role=='Admin')--}}

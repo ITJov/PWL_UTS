@@ -26,31 +26,30 @@
                         {{implode('',$errors->all(':message'))}}
                     </div>
                 @endif
-                <form method="post" action="{{route('mk-store')}}">
+                <form method="post" action="{{route('storeKurikulum', ['pengguna' => $users->id])}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="namaMatKul">Nama Mata Kuliah</label>
-                            <input type="text" class="form-control" id="namaMatKul"
-                                   placeholder="Nama Mata Kuliah"
-                                   required name="nama_mata_kuliah" maxlength="40" >
+                            <label for="namaUser">Nama User</label>
+                            <input type="text" class="form-control" id="namaUser"
+                                   placeholder="Nama User" value="{{ value($users->name) }}"
+                                   required disabled name="name" maxlength="40" >
                         </div>
                         <div class="form-group">
-                            <label for="sks">Jumlah SKS</label>
-                            <input type="text" class="form-control" id="sks"
-                                   placeholder="##"
-                                   required name="sks" maxlength="1" >
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email"
+                                   placeholder="Contoh : johndoe@gmail.com" value="{{value($users->email)}}"
+                                   required disabled name="email">
                         </div>
                         <div class="form-group">
-                            <label for="idKurikulum">Kurikulum</label>
-                            <select class="form-control" id="id-Kurikulum" name="kurikulum_id"  required>
-                                <option value="" disabled selected>Select your option</option>
-                                @foreach($mk as $kurikulum)
-                                    <option value="{{ $kurikulum->id }}">{{ $kurikulum->id }}
+                            <label for="kurikulum">Kurikulum yang digunakan</label>
+                            <select class="form-control" id="kurikulum" name="kurikulum" required>
+                                <option value="" disabled selected> Select your option</option>
+                                @foreach($kurikulums as $kurikulum)
+                                    <option value="{{ $kurikulum->id }}">Periode
                                         - {{ $kurikulum->periode }}</option>
                                 @endforeach
                             </select>
-
                         </div>
                         <button type="submit" class="btn btn-info">Submit</button>
                     </div>

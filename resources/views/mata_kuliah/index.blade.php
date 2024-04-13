@@ -21,13 +21,16 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
-{{--                @if(Auth::user()->namaRole->nama_role=='Admin')--}}
+                @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                    </div>
+                @endif
                 <div>
                     <a href="{{ route('mk-create') }}" class="btn btn-primary" title="Add Mata Kuliah">
                         Add mata kuliah
                     </a>
                 </div>
-{{--                @endif--}}
                 <h5 class="card-title">Polling Mata Kuliah</h5>
                 <table id="table-role" class="table table-striped">
                     <thead>

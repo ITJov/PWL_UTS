@@ -31,10 +31,14 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="semester">Semester</label>
-                            <input type="text" class="form-control" id="semester"
-                                   placeholder="Masukan semester"
-                                   required name="semester" maxlength="2" >
+                            <label for="periode">Periode yang dipilih</label>
+                            <select class="form-control" id="periode" name="periode"  required>
+                                <option value="" disabled selected> Select your option</option>
+                                @foreach($kurikulums as $kurikulum)
+                                    <option value="{{ $kurikulum->id }}">{{ $kurikulum->id }}
+                                        - {{ $kurikulum->periode }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="tanggal_mulai">Tanggal Mulai</label>

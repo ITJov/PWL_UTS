@@ -36,23 +36,42 @@ class MataKuliahController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request);
       $validateData = validator($request->all(),[
-            'nama_mata_kuliah'=>'required|string|max:40|unique:mata_kuliah',
-            'sks'=>'required|string|max:2',
+            'nama_mata_kuliah'=>'required|string|max:40',
+            'sks'=>'required|string|max:1',
             'kurikulum_id'=>'required|string|max:40',
         ],[
             'nama_mata_kuliah.required' => 'Nama Mata Kuliah harus diisi',
-            'nama_mata_kuliah.unique' => 'Nama Mata kuliah sudah terdaftar, silahkan diganti dengan mata kuliah lain',
             'sks.required' => 'Jumlah SKS harus diisi',
             'kurikulum_id.required' => 'Kurikulum harus diisi',
         ])-> validate();
 
         $id = IdGenerator::generate(['table' => 'mata_kuliah', 'length' => 10, 'prefix' =>'MK-']);
+        $data=false;
+        if(MataKuliah::all()->isEmpty()){
+            $data=true;
+        }else{
+            foreach (MataKuliah::all() as $data ){
+                if($data['nama_mata_kuliah'] == $request->nama_mata_kuliah ){
+                    if($data['kurikulum_id'] == $request->kurikulum_id ) {
+                        return redirect()->back()->withErrors('Mata Kuliah dengan periode ini sudah pernah didaftarkan')->withInput();
+                    }
+                    else{
+                        $data=true;
+                    }
+                }elseif($data ==null){
+                    $data=true;
+                }
+            }
+        }
 
-        $matKul = new MataKuliah($validateData);
-        $matKul->id = $id;
-        $matKul->save();
-        return redirect(route('mk-index'))->with('flash_message', 'Mata Kuliah ditambahkan');
+        if($data){
+            $matKul = new MataKuliah($validateData);
+            $matKul->id = $id;
+            $matKul->save();
+            return redirect(route('mk-index'))->with('flash_message', 'Mata Kuliah ditambahkan');
+        }
     }
 
     /**
@@ -80,19 +99,31 @@ class MataKuliahController extends Controller
     public function update  (Request $request, MataKuliah $mataKuliah)
     {
         $validateData = validator($request->all(), [
-            'nama_mata_kuliah' => ['required','max:45',Rule::unique('mata_kuliah')->ignore($mataKuliah->id),],
+            'nama_mata_kuliah' =>'required|string|max:40',
             'sks' => 'required|string|max:2',
             'kurikulum_id' => 'required|string|max:10',
         ], [
             'nama_mata_kuliah.required' => 'Nama mata kuliah harus diisi',
-            'nama_mata_kuliah.unique' => 'Nama mata kuliah sudah pernah didaftarkan',
         ])-> validate();
 
-        $mataKuliah->nama_mata_kuliah = $validateData['nama_mata_kuliah'];
-        $mataKuliah->sks = $validateData['sks'];
-        $mataKuliah->kurikulum_id = $validateData['kurikulum_id'];
-        $mataKuliah->save();
-        return redirect(route('mk-index'));
+        $data= false;
+        foreach (MataKuliah::all() as $data ){
+            if($data['nama_mata_kuliah'] == $request->nama_mata_kuliah ){
+                if($data['kurikulum_id'] == $request->kurikulum_id ) {
+                    return redirect()->back()->withErrors('Mata Kuliah dengan periode ini sudah pernah didaftarkan')->withInput();
+                }
+                else{
+                    $data=true;
+                }
+            }
+        }
+        if($data) {
+            $mataKuliah->nama_mata_kuliah = $validateData['nama_mata_kuliah'];
+            $mataKuliah->sks = $validateData['sks'];
+            $mataKuliah->kurikulum_id = $validateData['kurikulum_id'];
+            $mataKuliah->save();
+            return redirect(route('mk-index'));
+        }
     }
 
     /**

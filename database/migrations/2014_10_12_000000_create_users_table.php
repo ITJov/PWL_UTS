@@ -1,7 +1,9 @@
 <?php
 
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -19,9 +21,19 @@ return new class extends Migration
             $table->string('password');
             $table->string('role');
             $table->foreign('role')->references('id')->on('role');
+            $table->string('kurikulum')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
+
+        $id = IdGenerator::generate(['table' => 'users', 'length' => 10, 'prefix' =>'PGN-']);
+        DB::table('users')->insert([
+            ['id' => $id,
+            'name'=>'admin',
+            'email'=>'admin@gmail.com',
+            'password'=>'admin',
+            'role'=>DB::table('role')->where('nama_role', 'Admin')->value('id')],
+        ]);
     }
 
     /**

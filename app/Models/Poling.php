@@ -13,7 +13,7 @@ class Poling extends Model
 
     protected $fillable =[
         'id',
-        'semester',
+        'periode',
         'tanggal_mulai',
         'tanggal_selesai',
     ];
@@ -22,4 +22,8 @@ class Poling extends Model
 
     public $incrementing =false;
     protected $keyType='string';
+
+    public function namaKurikulum(){
+        return $this->belongsTo(kurikulum::class,'kurikulum');
+    }
 }

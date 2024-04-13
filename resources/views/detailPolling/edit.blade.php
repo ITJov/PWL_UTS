@@ -36,22 +36,8 @@
                                name="id" value="{{ value($poleDetail->id) }}"
                                readonly autofocus maxlength="10">
                     </div>
-                    <div class="form-group">
-                        <label for="idPole">Semester yang dipilih</label>
-                        <select class="form-control" id="idPole" name="polling_id" required>
-                            @foreach($poles as $pole)
-                                @if($pole->id == $poleDetail->polling_id)
-                                <option selected value="{{ $pole->id }}">Semester
-                                    - {{ $pole->semester }}</option>
-                                @else
-                                    <option value="{{ $pole->id }}">Semester
-                                        - {{ $pole->semester }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
                     @php
-                        $mataKuliah = json_decode($poleDetail->mata_kuliah_id);
+                        $mataKuliah = $poleDetail->mata_kuliah_id;
                     @endphp
                     <table id="table-role" class="table table-striped">
                         <thead>
@@ -64,6 +50,7 @@
                         </thead>
                         <tbody>
                             @foreach($mks as $mk)
+                                @if(Auth::user()->kurikulum == $mk->kurikulum_id)
                                 <tr>
                                     <td>
                                         <input type="checkbox" id="mata_kuliah_id" name="mk[]"
@@ -73,6 +60,7 @@
                                     <td>{{$mk->nama_mata_kuliah}}</td>
                                     <td>{{$mk->sks}}</td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

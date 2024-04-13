@@ -24,6 +24,7 @@
                 @if($errors->any())
                     <div class="alert alert-danger">
                         {{implode('',$errors->all(':message'))}}
+                        <br>
                     </div>
                     <br>
                 @endif
@@ -37,10 +38,19 @@
                                    readonly autofocus maxlength="10">
                         </div>
                         <div class="form-group">
-                            <label for="semester">Semester</label>
-                            <input type="text" class="form-control" id="semester"
-                                   placeholder="Masukan semester"  value="{{ value($pole->semester)}}"
-                                   required name="semester" maxlength="2" >
+                            <label for="periode">Periode</label>
+                            <select class="form-control" id="periode" name="periode">
+                                @foreach($kurikulums as $kurikulum)
+                                    @if($kurikulum->id == $pole->periode)
+                                        <option selected value="{{ $kurikulum->id }}">Tahun
+                                            - {{ $kurikulum->periode }}</option>
+                                    @else
+                                        <option value="{{ $kurikulum->id }}">Tahun
+                                            - {{ $kurikulum->periode }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+
                         </div>
                         <div class="form-group">
                             <label for="tanggal_mulai">Tanggal Mulai</label>
