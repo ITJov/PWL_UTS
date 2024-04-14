@@ -58,9 +58,7 @@ class roleController extends Controller
      */
     public function edit(role $role)
     {
-        return view('role.edit' , [
-            'roles' => $role,
-        ]);
+        //
     }
 
     /**
@@ -68,15 +66,7 @@ class roleController extends Controller
      */
     public function update(Request $request, role $role)
     {
-        $validateData = validator($request->all(), [
-            'nama_role  ' => 'required|string|max:45',
-        ], [
-            'nama_role.required' => 'nama role harus diisi',
-        ])-> validate();
-
-        $role->nama_role = $validateData['nama_role'];
-        $role->save();
-        return redirect(route('role-index'));
+        //
     }
 
     /**
@@ -84,7 +74,6 @@ class roleController extends Controller
      */
     public function destroy(role $role)
     {
-        $role->delete();
-        return redirect(route('role-index'));
+        //
     }
 }

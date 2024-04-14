@@ -31,11 +31,11 @@
                 <form method="post" action="{{route('kurikulum-store')}}">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="idKurikulum">ID</label>
-                            <input type="text" class="form-control" id="idKurikulum" placeholder="Id Kurikulum" name="id"
-                                   required autofocus maxlength="10">
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="idKurikulum">ID</label>--}}
+{{--                            <input type="text" class="form-control" id="idKurikulum" placeholder="Id Kurikulum" name="id"--}}
+{{--                                   required autofocus maxlength="10">--}}
+{{--                        </div>--}}
                         <div class="form-group">
                             <label for="namaPeriode">Periode</label>
                             <input type="text" maxlength="4" class="form-control" id="namaPeriode" placeholder="####"

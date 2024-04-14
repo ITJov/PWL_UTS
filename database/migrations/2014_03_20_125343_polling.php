@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('polling_date',function(Blueprint $table){
-            $table->id()->unique();
-            $table->string('polling_id');
-            $table->foreign('polling_id')->references('id')->on('polling');
-            $table->string('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
-            $table->string('mata_kuliah_id');
-            $table->foreign('mata_kuliah_id')->references('kode_mata_kuliah')->on('mata_kuliah');
+        Schema::create('polling',function(Blueprint $table){
+            $table->string('id',10)->unique()->primary();
+            $table->string('periode')->unique();
+            $table->dateTime('tanggal_mulai');
+            $table->dateTime('tanggal_selesai');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

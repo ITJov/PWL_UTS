@@ -13,7 +13,8 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">Jangan Lupa diganti</a>
+{{--                {{Auth::user()->name}}--}}
             </div>
         </div>
 
@@ -59,6 +60,30 @@
                             <a href="kurikulum" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kurikulum</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="user" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pole" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p> Waktu Pole</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="poleDetail" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pemilihan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="logout" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Logout</p>
                             </a>
                         </li>
                     </ul>
