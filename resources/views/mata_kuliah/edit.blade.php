@@ -1,7 +1,23 @@
-@extends('mata_kuliah.layout')
-@section('content')
+@extends('layouts.master')
 
-    <!-- Main content -->
+@section('web-content')
+    <!-- Content Header (Page Header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Starter Page</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Starter Page</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
@@ -10,13 +26,13 @@
                         {{implode('',$errors->all(':message'))}}
                     </div>
                 @endif
-                <form method="post" action="{{route('mk-update', ['mataKuliah' => $mk->kode_mata_kuliah])}}">
+                <form method="post" action="{{route('mk-update', ['mataKuliah' => $mk->id])}}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="kodeMatKul">ID</label>
                             <input type="text" class="form-control" id="kodeMatKul"
-                                   placeholder="Kode Mata Kuliah" name="kode_mata_kuliah" value="{{ value($mk->kode_mata_kuliah) }}"
+                                   placeholder="Kode Mata Kuliah" name="id" value="{{ value($mk->id) }}"
                                    readonly autofocus maxlength="10">
                         </div>
                         <div class="form-group">

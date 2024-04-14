@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        schema::create('mata_kuliah', function (Blueprint $table)
-        {
-            $table->string('kode_mata_kuliah',5)->unique()->primary();
-            $table->string('nama_mata_kuliah',45)->unique();
-            $table->integer('sks');
-            $table->string('kurikulum_id',2);
-            $table->foreign('kurikulum_id')->references('id')->on('kurikulum');
+        Schema::create('polling',function(Blueprint $table){
+            $table->string('id',10)->unique()->primary();
+            $table->string('periode')->unique();
+            $table->dateTime('tanggal_mulai');
+            $table->dateTime('tanggal_selesai');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });
