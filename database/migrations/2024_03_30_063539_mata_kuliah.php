@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama_mata_kuliah',45);
             $table->integer('sks');
             $table->string('kurikulum_id',10);
-            $table->foreign('kurikulum_id')->references('id')->on('kurikulum');
+            $table->foreign('kurikulum_id')->references('id')->on('kurikulum')->onDelete('cascade');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

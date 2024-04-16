@@ -41,6 +41,7 @@
                         <th>Kurikulum</th>
                         <th>Id User</th>
                         <th>Mata Kuliah yang Dipilih</th>
+                        <th>SKS</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +52,7 @@
                             <td>{{$poleDetail->namaPole->periode}}</td>
                             <td>{{$poleDetail->namaUser->name}}</td>
                             <td>{{$poleDetail->namaMatKul->nama_mata_kuliah }}</td>
+                            <td>{{$poleDetail->namaMatKul->sks}}</td>
 {{--                            @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                             <td>
                                 <a href="{{ route('poleDetail-edit', ['pollingDetail' =>$poleDetail->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>

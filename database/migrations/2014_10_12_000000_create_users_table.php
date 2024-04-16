@@ -4,6 +4,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role');
-            $table->foreign('role')->references('id')->on('role');
+            $table->foreign('role')->references('id')->on('role')->onDelete('cascade');
             $table->string('kurikulum')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -31,7 +32,7 @@ return new class extends Migration
             ['id' => $id,
             'name'=>'admin',
             'email'=>'admin@gmail.com',
-            'password'=>'admin',
+            'password'=>Hash::make('admin'),
             'role'=>DB::table('role')->where('nama_role', 'Admin')->value('id')],
         ]);
     }

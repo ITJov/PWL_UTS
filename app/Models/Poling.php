@@ -18,8 +18,6 @@ class Poling extends Model
         'tanggal_selesai',
     ];
 
-    protected $primaryKey = 'id';
-
     public $incrementing =false;
     protected $keyType='string';
 

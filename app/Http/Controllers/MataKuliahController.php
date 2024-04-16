@@ -106,24 +106,18 @@ class MataKuliahController extends Controller
             'nama_mata_kuliah.required' => 'Nama mata kuliah harus diisi',
         ])-> validate();
 
-        $data= false;
-        foreach (MataKuliah::all() as $data ){
-            if($data['nama_mata_kuliah'] == $request->nama_mata_kuliah ){
-                if($data['kurikulum_id'] == $request->kurikulum_id ) {
-                    return redirect()->back()->withErrors('Mata Kuliah dengan periode ini sudah pernah didaftarkan')->withInput();
-                }
-                else{
-                    $data=true;
-                }
-            }
-        }
-        if($data) {
-            $mataKuliah->nama_mata_kuliah = $validateData['nama_mata_kuliah'];
-            $mataKuliah->sks = $validateData['sks'];
-            $mataKuliah->kurikulum_id = $validateData['kurikulum_id'];
-            $mataKuliah->save();
-            return redirect(route('mk-index'));
-        }
+        $request->validate([
+            'nama_mata_kuliah' => 'unique:mata_kuliah,nama_mata_kuliah,'.$mataKuliah->id.',id,kurikulum_id,'.$validateData['kurikulum_id']
+        ], [
+            'nama_mata_kuliah.unique' => 'Nama mata kuliah dengan kurikulum yang sama sudah terdaftar.'
+        ]);
+
+        $mataKuliah->nama_mata_kuliah = $validateData['nama_mata_kuliah'];
+        $mataKuliah->sks = $validateData['sks'];
+        $mataKuliah->kurikulum_id = $validateData['kurikulum_id'];
+        $mataKuliah->save();
+
+        return redirect(route('mk-index'));
     }
 
     /**

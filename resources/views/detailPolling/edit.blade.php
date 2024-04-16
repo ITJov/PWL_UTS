@@ -33,12 +33,9 @@
                     <div class="form-group">
                         <label for="idPoleDetail">ID</label>
                         <input type="text" class="form-control" id="idPoleDetail"
-                               name="id" value="{{ value($poleDetail->id) }}"
+                               name="id" value="{{value($poleDetail->id) }}"
                                readonly autofocus maxlength="10">
                     </div>
-                    @php
-                        $mataKuliah = $poleDetail->mata_kuliah_id;
-                    @endphp
                     <table id="table-role" class="table table-striped">
                         <thead>
                         <tr>
@@ -49,18 +46,23 @@
                         </tr>
                         </thead>
                         <tbody>
+{{--                        <input type="checkbox" id="mata_kuliah_id" name="mk[]"--}}
+{{--                               value="{{$mk->id}}">--}}
                             @foreach($mks as $mk)
-                                @if(Auth::user()->kurikulum == $mk->kurikulum_id)
                                 <tr>
                                     <td>
-                                        <input type="checkbox" id="mata_kuliah_id" name="mk[]"
-                                               value="{{$mk->id}}" {{in_array($mk->id,$mataKuliah)?'checked':''}}>
+                                        @php $isChecked = false; @endphp
+                                        @foreach(\App\Models\PollingDetail::all() as $detail)
+                                            @if($detail->mata_kuliah_id == $mk->id)
+                                                @php $isChecked = true; break; @endphp
+                                            @endif
+                                        @endforeach
+                                        <input type="checkbox" id="mata_kuliah_id" name="mk[]" value="{{$mk->id}}" {{$isChecked ? 'checked' : ''}}>
                                     </td>
                                     <td>{{$mk->id}}</td>
                                     <td>{{$mk->nama_mata_kuliah}}</td>
                                     <td>{{$mk->sks}}</td>
                                 </tr>
-                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -70,7 +72,7 @@
             </div>
         </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content -->
+        <!-- /.content -->
 @endsection
 
 @section('spc-css')
