@@ -10,7 +10,7 @@
     </div>
     <ul>
         <li>
-            <a href="https://jbfarrow.com">
+            <a href="home">
                 <i class="fa fa-home fa-2x"></i>
                 <span class="nav-text">
                             Dashboard
@@ -69,22 +69,7 @@
                         </span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-map-marker fa-2x"></i>
-                <span class="nav-text">
-                            Member Map
-                        </span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-info fa-2x"></i>
-                <span class="nav-text">
-                            Documentation
-                        </span>
-            </a>
-        </li>
+
     </ul>
 
     <ul class="logout">
