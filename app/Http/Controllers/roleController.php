@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\role;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class roleController extends Controller
 {
@@ -34,16 +32,15 @@ class roleController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(),[
-            'nama_role'=>'required|string|max:40|unique:role',
+            'id'=>'required|string|max:10|unique:role',
+            'nama_role'=>'required|string|max:40',
         ],[
+            'id.required' => 'Role ID keluarga harus diisi',
+            'id.unique' => 'Role ID sudah terdaftar, silahkan diganti dengan nomor lain',
             'nama_role.required' => 'Nama Role harus diisi',
-            'nama_role.unique' => 'Nama Role sudah pernah ada',
         ])-> validate();
 
-        $id = IdGenerator::generate(['table' => 'role', 'length' => 10, 'prefix' =>'RL-']);
-
         $role = new role($validateData);
-        $role->id=$id;
         $role->save();
         return redirect(route('role-index'));
     }
@@ -61,9 +58,7 @@ class roleController extends Controller
      */
     public function edit(role $role)
     {
-        return view('role.edit' , [
-            'roles' => $role,
-        ]);
+        //
     }
 
     /**
@@ -71,16 +66,7 @@ class roleController extends Controller
      */
     public function update(Request $request, role $role)
     {
-        $validateData = validator($request->all(), [
-            'nama_role'=>['required','max:40',Rule::unique('role')->ignore($role->id),],
-        ],[
-            'nama_role.required' => 'Nama Role harus diisi',
-            'nama_role.unique' => 'Nama Role sudah pernah ada',
-        ])-> validate();
-
-        $role->nama_role = $validateData['nama_role'];
-        $role->save();
-        return redirect(route('role-index'));
+        //
     }
 
     /**
@@ -88,7 +74,6 @@ class roleController extends Controller
      */
     public function destroy(role $role)
     {
-        $role->delete();
-        return redirect(route('role-index'));
+        //
     }
 }

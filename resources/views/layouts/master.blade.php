@@ -15,6 +15,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    <link href="{{asset('dist/css/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <script src="{{asset('dist/js/script.js')}}" defer></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     @yield('spc-css')
 </head>
 <body class="hold-transition sidebar-mini">

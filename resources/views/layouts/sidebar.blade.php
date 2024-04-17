@@ -1,105 +1,100 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Jangan Lupa diganti</a>
-{{--                {{Auth::user()->name}}--}}
-            </div>
+<div class="area"></div><nav class="main-menu">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
+        <div class="info">
+            <a href="#" class="d-block">Jangan Lupa diganti</a>
+            {{--                {{Auth::user()->name}}--}}
         </div>
-
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Menu
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="role" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Role</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="mk" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Mata Kuliah</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="kurikulum" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kurikulum</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="user" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pole" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p> Waktu Pole</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="poleDetail" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pemilihan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="logout" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Logout</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Simple Link
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
-</aside>
+    <ul>
+        <li>
+            <a href="https://jbfarrow.com">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                            Dashboard
+                        </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="role" >
+                <i class="fa fa-globe fa-2x"></i>
+                <span class="nav-text">
+                            Role
+                        </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="mk" class="nav-link">
+                <i class="fa fa-comments fa-2x"></i>
+                <span class="nav-text">
+                            Mata Kuliah
+                        </span>
+            </a>
+
+        </li>
+        <li class="has-subnav">
+            <a href="kurikulum">
+                <i class="fa fa-camera-retro fa-2x"></i>
+                <span class="nav-text">
+                            Kurikulum
+                        </span>
+            </a>
+
+        </li>
+        <li>
+            <a href="user">
+                <i class="fa fa-film fa-2x"></i>
+                <span class="nav-text">
+                            User
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="pole">
+                <i class="fa fa-book fa-2x"></i>
+                <span class="nav-text">
+                           Waktu Pole
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="poleDetail">
+                <i class="fa fa-cogs fa-2x"></i>
+                <span class="nav-text">
+                            Pemilihan
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <span class="nav-text">
+                            Member Map
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-info fa-2x"></i>
+                <span class="nav-text">
+                            Documentation
+                        </span>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="logout">
+        <li>
+            <a href="logout">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                            Logout
+                        </span>
+            </a>
+        </li>
+    </ul>
+</nav>
