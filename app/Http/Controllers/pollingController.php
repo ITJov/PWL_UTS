@@ -32,7 +32,6 @@ class pollingController extends Controller
     {
         return view('polling.create', [
             'pole' => Poling::all(),
-            'kurikulums'=>kurikulum::all(),
         ]);
     }
 
@@ -42,12 +41,9 @@ class pollingController extends Controller
     public function store(Request $request)
     {
         $validateData = validator($request->all(),[
-            'periode'=>'required|string|unique:polling',
             'tanggal_mulai'=>'required',
             'tanggal_selesai'=>'required',
         ],[
-            'periode.required' => 'Periode harus diisi',
-            'periode.unique'=>'Periode ini sudah pernah ditambahkan',
             'tanggal_mulai.required'=> 'Tanggal Mulai belum diisi',
             'tanggal_selesai.required'=> 'Tanggal Akhir belum diisi',
         ])-> validate();
@@ -56,6 +52,7 @@ class pollingController extends Controller
 
         $pole = new Poling($validateData);
         $pole->id=$id;
+        $pole->status = 1;
         $pole->save();
         return redirect(route('pole-index'));
     }
@@ -86,37 +83,21 @@ class pollingController extends Controller
     {
         $validateData = validator($request->all(), [
             'id'=>['required','max:10',Rule::unique('polling')->ignore($polling->id),],
-//            'semester'=>['required',Rule::unique('polling')->ignore($polling->id),],
-            'periode'=>'required|string',
             'tanggal_mulai'=>'required',
             'tanggal_selesai'=>'required',
+            'status'=>'required'
         ], [
             'id.required' => 'ID Polling harus diisi',
             'id.unique' => 'ID sudah terdaftar, silahkan diganti dengan nomor lain',
-            'periode.required' => 'Periode harus diisi',
-//            'semester.required' => 'Semester harus diisi',
-//            'semester.unique' => 'Semester sudah pernah ditambahkan, silahkan cek kembali',
             'tanggal_mulai.required'=> 'Tanggal Mulai belum diisi',
             'tanggal_selesai.required'=> 'Tanggal Akhir belum diisi',
+            'status.required'=>'Status belum dipilih'
         ])-> validate();
 
-//        $data= false;
-//        foreach (Poling::all() as $data ){
-//            if($data['periode'] == $request->periode ){
-//                if($data['semester'] == $request->semester ) {
-//                    return redirect()->back()->withErrors('Semester dengan periode ini sudah pernah didaftarkan')->withInput();
-//                }
-//                else{
-//                    $data=true;
-//                }
-//            }
-//        }
-//
-//        if($data){
         $polling->id = $validateData['id'];
-        $polling->periode = $validateData['periode'];
         $polling->tanggal_mulai = $validateData['tanggal_mulai'];
         $polling->tanggal_selesai = $validateData['tanggal_selesai'];
+        $polling->status = $validateData['status'];
         $polling->save();
         return redirect(route('pole-index'));
 //        }
@@ -127,7 +108,13 @@ class pollingController extends Controller
      */
     public function destroy(Poling $polling)
     {
-        $polling->delete();
-        return redirect(route('pole-index'));
+        $checkPolling = PollingDetail::where('polling_id', $polling->id)->first();
+        if ($checkPolling) {
+            return redirect()->back()->withErrors('Periode polling sedang terpakai')->withInput();
+        }
+        else {
+            $polling->delete();
+            return redirect(route('pole-index'));
+        }
     }
 }

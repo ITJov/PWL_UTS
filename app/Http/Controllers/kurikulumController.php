@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\kurikulum;
+use App\Models\MataKuliah;
 use App\Models\role;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
@@ -89,7 +90,14 @@ class kurikulumController extends Controller
      */
     public function destroy(kurikulum $kurikulum)
     {
-        $kurikulum->delete();
-        return redirect(route('kurikulum-index'));
+        $checkMatKul = MataKuliah::where('kurikulum_id', $kurikulum->id)->first();
+        if ($checkMatKul) {
+            return redirect()->back()->withErrors('Kurikulum sedang terpakai')->withInput();
+            }
+        else{
+            $kurikulum->delete();
+            return redirect(route('kurikulum-index'));
+        }
+
     }
 }

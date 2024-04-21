@@ -29,17 +29,6 @@
                 @endif
                 <form method="post" action="{{route('pole-store')}}">
                     @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="periode">Periode yang dipilih</label>
-                            <select class="form-control" id="periode" name="periode"  required>
-                                <option value="" disabled selected> Select your option</option>
-                                @foreach($kurikulums as $kurikulum)
-                                    <option value="{{ $kurikulum->id }}">{{ $kurikulum->id }}
-                                        - {{ $kurikulum->periode }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label for="tanggal_mulai">Tanggal Mulai</label>
                             <input type="datetime-local" class="form-control" id="tanggal_mulai"

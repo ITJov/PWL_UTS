@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kurikulum;
 use App\Models\MataKuliah;
 use App\Models\Poling;
 use App\Models\PollingDetail;
@@ -21,10 +22,12 @@ class pollingDetailController extends Controller
      */
     public function index()
     {
-//        dd(Auth::user());
+//        dd(Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d h:i:s'));
         $data = PollingDetail::all();
         return view('detailPolling.index', [
             'poleDetails' => $data,
+            'kurikulums'=>kurikulum::all(),
+            'mks' => MataKuliah::all(),
         ]);
     }
 
@@ -38,17 +41,17 @@ class pollingDetailController extends Controller
                 return  back()->with([
                     'message' => 'Anda sudah melakukan poling',
                 ]);
+            }else{
             }
-
         }
-        $checker = false;
-        $dataPole=Poling::all();
 
-        foreach ($dataPole as $data){
-            if($data['periode'] == Auth::user()->kurikulum) {
-                $tanggalMulai = Carbon::parse($data['tanggal_mulai'])->format('Y-m-d h:i:s');
+        $checker = false;
+
+        foreach (Poling::all() as $data){
+            if($data['status'] ==  1){
+                $tanggalMulai = Carbon::createFromFormat('Y-m-d H:i:s', $data['tanggal_mulai'], 'Asia/Jakarta');
                 if(Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d h:i:s') >= $tanggalMulai){
-                    $tanggalSelesai= Carbon::parse($data['tanggal_selesai'])->format('Y-m-d h:i:s');
+                    $tanggalSelesai= Carbon::createFromFormat('Y-m-d H:i:s', $data['tanggal_selesai'], 'Asia/Jakarta');
                     if(Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d h:i:s') <= $tanggalSelesai){
                         $checker = true;
                     }
@@ -59,7 +62,6 @@ class pollingDetailController extends Controller
         if($checker){
             return view('detailPolling.create', [
                 'mks' => MataKuliah::all(),
-                'pole'=>Poling::all(),
             ]);
         }else{
             return  back()->with([
@@ -81,7 +83,8 @@ class pollingDetailController extends Controller
 
         $polling=(DB::table('polling')
             ->select('id')
-            ->where('periode', Auth::user()->kurikulum)
+            ->whereDate('tanggal_mulai', '<=', Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d h:i:s')) // Memilih polling dengan tanggal_mulai kurang dari atau sama dengan tanggal saat ini
+            ->whereDate('tanggal_selesai', '>=', Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d h:i:s')) // Memilih polling dengan tanggal_selesai lebih besar dari atau sama dengan tanggal saat ini
             ->first());
 
         $id = IdGenerator::generate(['table' => 'polling_date','length' => 10,'prefix' =>'PD-']);
@@ -144,11 +147,6 @@ class pollingDetailController extends Controller
 
         $this->destroy($pollingDetail);
 
-        $polling=(DB::table('polling')
-            ->select('id')
-            ->where('periode', Auth::user()->kurikulum)
-            ->first());
-
         $sks = 0;
         foreach ($request->mk as $data) {
             $sksData = DB::table('mata_kuliah')->select('sks')->where('id', $data)->first();
@@ -163,7 +161,7 @@ class pollingDetailController extends Controller
             foreach ($validateData['mk'] as $data){
                 $poleDetail = new PollingDetail();
                 $poleDetail->id= $validateData['id'];
-                $poleDetail->polling_id = $polling->id;
+                $poleDetail->polling_id = $pollingDetail->id;
                 $poleDetail->user_id=Auth::user()->id;
                 $poleDetail->mata_kuliah_id =$data;
                 $poleDetail -> save();

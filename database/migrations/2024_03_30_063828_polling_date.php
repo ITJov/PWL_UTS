@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('polling_date',function(Blueprint $table){
             $table->string('id',10);
             $table->string('polling_id');
-            $table->foreign('polling_id')->references('id')->on('polling')->onDelete('cascade');
+            $table->foreign('polling_id')->references('id')->on('polling');
             $table->string('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('mata_kuliah_id');
-            $table->foreign('mata_kuliah_id')->references('id')->on('mata_kuliah')->onDelete('cascade');
+            $table->foreign('mata_kuliah_id')->references('id')->on('mata_kuliah');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

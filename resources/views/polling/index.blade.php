@@ -31,20 +31,19 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Untuk <br> Periode</th>
-                        <th>Semester</th>
                         <th>Tanggal Mulai</th>
                         <th>Tanggal Berakhir</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($poles as $pole)
                         <tr>
                             <td>{{$pole->id}}</td>
-                            <td>{{$pole->periode}}</td>
 {{--                            <td>{{$pole->semester}}</td>--}}
                             <td>{{date('d-m-Y H:i:s', strtotime($pole->tanggal_mulai))}}</td>
                             <td>{{date('d-m-Y H:i:s', strtotime($pole->tanggal_selesai))}}</td>
+                            <td>{{$pole->status}}</td>
 {{--                            @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                             <td>
                                 <a href="{{ route('pole-edit', ['polling' =>$pole->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>

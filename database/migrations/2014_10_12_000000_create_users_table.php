@@ -21,8 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role');
-            $table->foreign('role')->references('id')->on('role')->onDelete('cascade');
-            $table->string('kurikulum')->nullable();
+            $table->foreign('role')->references('id')->on('role')->onDelete('restrict');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -21,9 +21,14 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        {{implode('',$errors->all(':message'))}}
+                    </div>
+                @endif
 {{--                @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                 <div>
-                    <a href="/user-create" class="btn btn-primary">Masukan User</a>
+                    <a href="{{route('userCreate')}}" class="btn btn-primary">Masukan User</a>
                 </div>
 {{--                @endif--}}
                 <h5 class="card-title">Jenis Role</h5>
@@ -34,7 +39,6 @@
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Kurikulum yang <br> digunakan</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,11 +48,6 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->namaRole->nama_role}}</td>
-                            @if($user->namaRole->nama_role == 'User' and $user->kurikulum== Null)
-                                <td><a href="{{ route('addKurikulumUser', ['pengguna' =>$user->id]) }}">Tambahkan <br> Kurikulum</a></td>
-                            @else
-                                <td>{{$user->kurikulum}}</td>
-                            @endif
 {{--                            @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                             <td>
                                 <a href="{{ route('user-edit', ['pengguna' =>$user->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>

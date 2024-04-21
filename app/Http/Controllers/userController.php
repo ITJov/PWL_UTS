@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kurikulum;
 use App\Models\Pengguna;
+use App\Models\PollingDetail;
 use App\Models\role;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -47,7 +48,6 @@ class userController extends Controller
             'password'=>'required|string',
             'email'=>'required|string',
             'role'=>'required|string|max:40',
-            'kurikulum'=>'nullable',
         ],[
             'name.required'=> 'Nama harus diisi',
             'name.unique'=> 'Nama sudah pernah didaftarkan',
@@ -61,27 +61,6 @@ class userController extends Controller
         $user->id=$id;
         $user->save();
 
-        return redirect(route('user-index'));
-    }
-    public function addKurikulum(User $pengguna)
-    {
-        return view('user.addKurikulum' , [
-            'users' => $pengguna,
-            'roles' => role::all(),
-            'kurikulums' => kurikulum::all(),
-        ]);
-    }
-
-    public function storeKurikulum(Request $request, User $pengguna)
-    {
-        $validateData = validator($request->all(), [
-            'kurikulum'=>'required',
-        ], [
-            'kurikulum.required'=>'Kurikulum belum dimasukan'
-        ])->validate();
-
-        $pengguna->kurikulum = $validateData['kurikulum'];
-        $pengguna->save();
         return redirect(route('user-index'));
     }
     /**
@@ -101,7 +80,6 @@ class userController extends Controller
         return view('user.edit' , [
             'users' => $pengguna,
             'roles' => role::all(),
-            'kurikulums' => kurikulum::all(),
         ]);
     }
 
@@ -113,34 +91,21 @@ class userController extends Controller
         $validateData = validator($request->all(), [
             'id'=>'required|string|max:10',
             'name'=>['required', Rule::unique('users')->ignore($pengguna->id),],
+            'password'=>'required|string',
             'email'=>'required|string',
             'role'=>'required|string|max:40',
-            'kurikulum'=>'nullable'
         ], [
             'name.required'=> 'Nama harus diisi',
             'name.unique'=> 'Nama sudah pernah didaftarkan',
             'email.required'=> 'Email harus diisi',
+            'password.required'=> 'Email harus diisi',
         ])-> validate();
 
         $pengguna->id = $validateData['id'];
         $pengguna->name = $validateData['name'];
         $pengguna->email = $validateData['email'];
+        $pengguna->password = $validateData['password'];
         $pengguna->role = $validateData['role'];
-
-        $roleCheck = DB::select('select nama_role from role where id = :id', ['id' => $request->role]);
-        $hasil = $roleCheck[0]->nama_role;
-        if($hasil != 'User'){
-            $pengguna->kurikulum = Null;
-        }
-        elseif($hasil == 'User'){
-            if($request->kurikulum == Null){
-                return redirect()->back()->withErrors('Kurikulum harus diisi')->withInput();
-            }
-            else{
-                $pengguna->kurikulum = $validateData['kurikulum'];
-            }
-        }
-
         $pengguna->save();
         return redirect(route('user-index'));
     }
@@ -150,37 +115,19 @@ class userController extends Controller
      */
     public function destroy(User $pengguna)
     {
-        $pengguna->delete();
-        return redirect(route('user-index'));
+        $checkMatKul = PollingDetail::where('user_id', $pengguna->id)->first();
+        if ($checkMatKul) {
+            return redirect()->back()->withErrors('User sedang terpakai')->withInput();
+        }
+        else {
+            $pengguna->delete();
+            return redirect(route('user-index'));
+        }
     }
 
     public function logout(){
         Auth::logout();
         return redirect('login');
     }
-
-//    public function namaRole($a){
-//        $results = DB::select('select nama_role from role where id = :id', ['id' => $a]);
-//        $periode = $results[0]->nama_role;
-//        return $periode;
-//    }
-//
-//    public function validationStore(Request $request){
-//        $dataRole = $request->role;
-//        if ($this->namaRole($dataRole) == 'Admin' and $request->kurikulum =='Admin'){
-//            $this->store($request);
-//        }
-//        elseif ($this->namaRole($dataRole) != 'Admin' and $request->kurikulum !='Admin'){
-//            $this->store($request);
-//        }
-//        else{
-//            if ($this->namaRole($dataRole) == 'Admin' and $request->kurikulum !='Admin'){
-//                return redirect()->back()->withErrors('Admin tidak boleh memiliki kurikulum')->withInput();
-//            }elseif ($this->namaRole($dataRole) != 'Admin' and $request->kurikulum =='Admin'){
-//                return redirect()->back()->withErrors('Kurikulum tidak sesuai')->withInput();
-//            }
-//        }
-//
-//    }
 
 }

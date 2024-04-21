@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('polling',function(Blueprint $table){
             $table->string('id',10)->unique()->primary();
-            $table->string('periode')->unique();
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
+            $table->binary('status');
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

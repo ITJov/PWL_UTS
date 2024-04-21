@@ -4,13 +4,13 @@
             <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="#" class="d-block">Jangan Lupa diganti</a>
+            <a href="#" class="d-block">{{Auth::user()->name}}</a>
             {{--                {{Auth::user()->name}}--}}
         </div>
     </div>
     <ul>
         <li>
-            <a href="https://jbfarrow.com">
+            <a href="home">
                 <i class="fa fa-home fa-2x"></i>
                 <span class="nav-text">
                             Dashboard
@@ -19,7 +19,7 @@
 
         </li>
         <li class="has-subnav">
-            <a href="role" >
+            <a href="{{route('role-index')}}" >
                 <i class="fa fa-globe fa-2x"></i>
                 <span class="nav-text">
                             Role
@@ -28,7 +28,7 @@
 
         </li>
         <li class="has-subnav">
-            <a href="mk" class="nav-link">
+            <a href="{{route('mk-index')}}" class="nav-link">
                 <i class="fa fa-comments fa-2x"></i>
                 <span class="nav-text">
                             Mata Kuliah
@@ -37,7 +37,7 @@
 
         </li>
         <li class="has-subnav">
-            <a href="kurikulum">
+            <a href="{{route('kurikulum-index')}}">
                 <i class="fa fa-camera-retro fa-2x"></i>
                 <span class="nav-text">
                             Kurikulum
@@ -46,7 +46,7 @@
 
         </li>
         <li>
-            <a href="user">
+            <a href="{{route('user-index')}}">
                 <i class="fa fa-film fa-2x"></i>
                 <span class="nav-text">
                             User
@@ -54,7 +54,7 @@
             </a>
         </li>
         <li>
-            <a href="pole">
+            <a href="{{route('pole-index')}}">
                 <i class="fa fa-book fa-2x"></i>
                 <span class="nav-text">
                            Waktu Pole
@@ -62,26 +62,10 @@
             </a>
         </li>
         <li>
-            <a href="poleDetail">
+            <a href="{{route('poleDetail-index')}}">
                 <i class="fa fa-cogs fa-2x"></i>
                 <span class="nav-text">
                             Pemilihan
-                        </span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-map-marker fa-2x"></i>
-                <span class="nav-text">
-                            Member Map
-                        </span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-info fa-2x"></i>
-                <span class="nav-text">
-                            Documentation
                         </span>
             </a>
         </li>

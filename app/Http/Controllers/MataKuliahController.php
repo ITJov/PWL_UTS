@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\kurikulum;
+use App\Models\PollingDetail;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use App\Models\MataKuliah;
@@ -39,12 +40,14 @@ class MataKuliahController extends Controller
 //        dd($request);
       $validateData = validator($request->all(),[
             'nama_mata_kuliah'=>'required|string|max:40',
-            'sks'=>'required|string|max:1',
+            'sks'=>'required|int|max:24|min:1',
             'kurikulum_id'=>'required|string|max:40',
         ],[
             'nama_mata_kuliah.required' => 'Nama Mata Kuliah harus diisi',
             'sks.required' => 'Jumlah SKS harus diisi',
             'kurikulum_id.required' => 'Kurikulum harus diisi',
+            'sks.min' => 'SKS tidak bisa dibawah 1',
+            'sks.max'=>'SKS tidak bisa melebihi 24',
         ])-> validate();
 
         $id = IdGenerator::generate(['table' => 'mata_kuliah', 'length' => 10, 'prefix' =>'MK-']);
@@ -100,10 +103,12 @@ class MataKuliahController extends Controller
     {
         $validateData = validator($request->all(), [
             'nama_mata_kuliah' =>'required|string|max:40',
-            'sks' => 'required|string|max:2',
+            'sks'=>'required|int|max:24|min:1',
             'kurikulum_id' => 'required|string|max:10',
         ], [
             'nama_mata_kuliah.required' => 'Nama mata kuliah harus diisi',
+            'sks.min' => 'SKS tidak bisa dibawah 1',
+            'sks.max'=>'SKS tidak bisa melebihi 24',
         ])-> validate();
 
         $request->validate([
@@ -125,8 +130,14 @@ class MataKuliahController extends Controller
      */
     public function destroy(MataKuliah $mataKuliah)
     {
-        $mataKuliah->delete();
-        return redirect(route('mk-index'));
+        $checkMatKul = PollingDetail::where('mata_kuliah_id', $mataKuliah->id)->first();
+        if ($checkMatKul) {
+            return redirect()->back()->withErrors('Mata Kuliah sedang terpakai')->withInput();
+        }
+        else {
+            $mataKuliah->delete();
+            return redirect(route('mk-index'));
+        }
     }
 
 }

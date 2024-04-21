@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Starter Page</h1>
+                    <h1 class="m-0"></h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Starter Page</li>
+                        <li class="breadcrumb-item"><a href="#"></a></li>
+                        <li class="breadcrumb-item active"></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -42,9 +42,15 @@
                                    required name="name" maxlength="40" value="{{ value($users->name) }}">
                         </div>
                         <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password"
+                                   placeholder="Masukan Password"
+                                   required name="password" value="{{ value($users->password) }}">
+                        </div>
+                        <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email"
-                                   placeholder="##"
+                                   placeholder="Masukan email"
                                    required name="email" value="{{ value($users->email) }}">
                         </div>
                         <div class="form-group">
@@ -57,21 +63,6 @@
                                     @else
                                         <option value="{{ $role->id }}">{{ $role->id }}
                                             - {{ $role->nama_role }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="kurikulum">Kurikulum</label>
-                            <select class="form-control" id="kurikulum" name="kurikulum">
-                                <option value="">Kurikulum untuk selain User</option>
-                                @foreach($kurikulums as $kurikulum)
-                                    @if($kurikulum->id == $users->kurikulum)
-                                        <option selected value="{{ $kurikulum->id }}">Tahun
-                                            - {{ $kurikulum->periode }}</option>
-                                    @else
-                                        <option value="{{ $kurikulum->id }}">Tahun
-                                            - {{ $kurikulum->periode }}</option>
                                     @endif
                                 @endforeach
                             </select>

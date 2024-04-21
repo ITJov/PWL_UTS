@@ -38,21 +38,6 @@
                                    readonly autofocus maxlength="10">
                         </div>
                         <div class="form-group">
-                            <label for="periode">Periode</label>
-                            <select class="form-control" id="periode" name="periode">
-                                @foreach($kurikulums as $kurikulum)
-                                    @if($kurikulum->id == $pole->periode)
-                                        <option selected value="{{ $kurikulum->id }}">Tahun
-                                            - {{ $kurikulum->periode }}</option>
-                                    @else
-                                        <option value="{{ $kurikulum->id }}">Tahun
-                                            - {{ $kurikulum->periode }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-
-                        </div>
-                        <div class="form-group">
                             <label for="tanggal_mulai">Tanggal Mulai</label>
                             <input type="datetime-local" class="form-control" id="tanggal_mulai"
                                    required name="tanggal_mulai" value="{{value($pole->tanggal_mulai)}}">
@@ -62,7 +47,13 @@
                             <input type="datetime-local" class="form-control" id="tanggal_selesai"
                                    required name="tanggal_selesai" value="{{value($pole->tanggal_selesai)}}">
                         </div>
-
+                        <div class="form-group">
+                            <label for="status">Periode</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="1" {{ $pole->status == 1 ? 'selected' : '' }}>Aktif</option>
+                                <option value="0" {{ $pole->status == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-info">Submit</button>
                     </div>
                 </form>
