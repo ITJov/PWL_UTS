@@ -5,14 +5,13 @@
         </div>
     </div>
     <ul>
-        @php
-            function cekRole($nama) {
-                $testing = \Illuminate\Support\Facades\DB::table('role')
-                            ->select('id')
-                            ->where(\Illuminate\Support\Str::upper('nama_role'),$nama)->first();
-                return $testing->id;
-            }
-        @endphp
+{{--        @php--}}
+{{--            $testingAdmin = \Illuminate\Support\Facades\DB::table('role')--}}
+{{--                           ->select('id')--}}
+{{--                           ->where(\Illuminate\Support\Str::upper('nama_role'),'ADMIN')->first();--}}
+{{--            $admin = $testingAdmin->id;--}}
+
+{{--        @endphp--}}
 
         <li>
             <a href="home">
@@ -23,7 +22,7 @@
             </a>
 
         </li>
-        @if(Auth::user()->role == cekRole('ADMIN'))
+{{--        @if(Auth::user()->role == $admin)--}}
         <li class="has-subnav">
             <a href="{{route('role-index')}}" >
                 <i class="fa fa-globe fa-2x"></i>
@@ -40,9 +39,16 @@
                         </span>
             </a>
         </li>
-        @endif
+{{--        @endif--}}
+{{--        @php--}}
+{{--            $testingProdi = \Illuminate\Support\Facades\DB::table('role')--}}
+{{--                           ->select('id')--}}
+{{--                           ->where(\Illuminate\Support\Str::upper('nama_role'),'PRODI')->first();--}}
+{{--            $prodi = $testingProdi->id;--}}
 
-        @if(Auth::user()->role == cekRole('PRODI'))
+{{--        @endphp--}}
+
+{{--    @if(Auth::user()->role == $prodi)--}}
             <li class="has-subnav">
                 <a href="{{route('kurikulum-index')}}">
                     <i class="fa fa-camera-retro fa-2x"></i>
@@ -76,8 +82,15 @@
                     </span>
                 </a>
             </li>
-        @endif
-        @if(Auth::user()->role == cekRole('USER'))
+{{--        @endif--}}
+{{--        @php--}}
+{{--            $testingUser = \Illuminate\Support\Facades\DB::table('role')--}}
+{{--                           ->select('id')--}}
+{{--                           ->where(\Illuminate\Support\Str::upper('nama_role'),'USER')->first();--}}
+{{--            $user = $testingUser->id;--}}
+
+{{--        @endphp--}}
+{{--        @if(Auth::user()->role == $user)--}}
         <li>
             <a href="{{route('poleDetail-index')}}">
                 <i class="fa fa-cogs fa-2x"></i>
@@ -86,6 +99,6 @@
                         </span>
             </a>
         </li>
-        @endif
+{{--        @endif--}}
     </ul>
 </nav>

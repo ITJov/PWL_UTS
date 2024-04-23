@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
         });
 
-        $data = ['Admin','Prodi', 'User'];
+        $data = ['Admin'];
 
         for ($i = 0; $i < count($data); $i++) {
             DB::table('role')->insert([

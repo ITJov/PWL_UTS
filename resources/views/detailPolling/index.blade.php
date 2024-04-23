@@ -23,9 +23,9 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card p-4">
-                @if(session('message'))
+                @if($errors->any())
                     <div class="alert alert-danger">
-                        {{ session('message') }}
+                        {{implode('',$errors->all(':message'))}}
                     </div>
                 @endif
 {{--                @if(Auth::user()->namaRole->nama_role=='Admin')--}}
@@ -64,45 +64,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                    @php
-                        $testing = \Illuminate\Support\Facades\DB::table('role')
-                                    ->select('nama_role')
-                                    ->where('id',auth()->user()->role)->first();
-                                $namaRole = \Illuminate\Support\Str::upper($testing->nama_role);
-                    @endphp
-                    @if(Auth::user()->role == 'PRODI')
-                    @foreach($kurikulums as $kurikulum)
-                        <h1 class="text-blue">Periode {{DB::table('kurikulum')->select('periode')->where('id',$kurikulum['id'])->first()->periode}}</h1>
-                        @foreach($poleDetails as $poleDetail)
-                            @if($poleDetail->namaMatKul->kurikulum_id == $kurikulum['id'])
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="card-title p-3 mb-0 bg-primary text-white rounded-pill">{{$poleDetail->namaMatKul->nama_mata_kuliah}} ({{$poleDetail->namaMatKul->sks}} SKS)</h3>
-                                        @foreach($mks as $mk)
-                                            @if($poleDetail->mata_kuliah_id == $mk['id'])
-                                                <table class="table table-striped table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Nama</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>{{$poleDetail->id}}</td>
-                                                        <td>{{$poleDetail->namaUser->name}}</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            @endif
-                                        @endforeach
-                                        <p class="card-text mt-3 bg-light p-2">Total: {{DB::table('polling_date')->where('mata_kuliah_id',$poleDetail->mata_kuliah_id)->count()}} orang</p>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    @endforeach
-                    @endif
+
             </div>
         </div><!-- /.container-fluid -->
     </div>

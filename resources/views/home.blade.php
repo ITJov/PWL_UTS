@@ -20,7 +20,7 @@
 
     <!-- Main content -->
     <!-- Content area -->
-    <div class="container bg-gradient-white shadow">
+    <div class="container bg-gradient-white shadow p-3">
         <!-- Page heading -->
         <h2 class="text-2xl font-semibold mb-4 mt-4 p-4">Dashboard</h2>
         <!-- Dashboard content -->

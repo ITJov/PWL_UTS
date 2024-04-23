@@ -136,10 +136,27 @@ class pollingDetailController extends Controller
      */
     public function edit(PollingDetail $pollingDetail)
     {
-        return view('detailPolling.edit' , [
-            'poleDetail' => $pollingDetail,
-            'mks' => MataKuliah::all(),
-        ]);
+        $checker = false;
+        foreach (Poling::all() as $data){
+            if($data['status'] ==  1){
+                $tanggalMulai = Carbon::createFromFormat('Y-m-d H:i:s', $data['tanggal_mulai'], 'Asia/Jakarta');
+                if(Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d h:i:s') >= $tanggalMulai){
+                    $tanggalSelesai= Carbon::createFromFormat('Y-m-d H:i:s', $data['tanggal_selesai'], 'Asia/Jakarta');
+                    if(Carbon::now()->timezone('Asia/Jakarta')->format('Y-m-d h:i:s') <= $tanggalSelesai){
+                        $checker = true;
+                    }
+                }
+            }
+        }
+
+        if($checker) {
+            return view('detailPolling.edit', [
+                'poleDetail' => $pollingDetail,
+                'mks' => MataKuliah::all(),
+            ]);
+        }else{
+            return redirect()->back()->withErrors('Waktu Poling sudah habis')->withInput();
+        }
     }
 
     /**
