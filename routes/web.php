@@ -92,7 +92,7 @@ Route::middleware(['auth','aksesProdi'])->group(function () {
     Route::get('pole-edit/{polling}', [pollingController::class, 'edit'])->name('pole-edit');
     Route::post('pole-edit/{polling}', [pollingController::class, 'update'])->name('pole-update');
     Route::get('pole-delete/{polling}', [pollingController::class, 'destroy'])->name('pole-delete');
-    Route::get("poleDetailProdi", [pollingDetailController::class, 'index'])->name('poleDetailProdi-index');
+    Route::get("poleDetailProdi", [pollingDetailController::class, 'indexProdi'])->name('poleDetailProdi-index');
 });
 
 Route::middleware(['auth','aksesUser'])->group(function () {

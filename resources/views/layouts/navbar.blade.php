@@ -3,7 +3,7 @@
 
 <nav class="nav">
     <i class="uil uil-bars navOpenBtn"></i>
-    <a href="#" class="logo">Morning</a>
+    <a href="#" class="logo"></a>
 
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

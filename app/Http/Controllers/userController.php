@@ -116,12 +116,16 @@ class userController extends Controller
     public function destroy(User $pengguna)
     {
         $checkMatKul = PollingDetail::where('user_id', $pengguna->id)->first();
-        if ($checkMatKul) {
-            return redirect()->back()->withErrors('User sedang terpakai')->withInput();
-        }
-        else {
-            $pengguna->delete();
-            return redirect(route('user-index'));
+        if(Auth::user()->id != $pengguna->id){
+            if ($checkMatKul) {
+                return redirect()->back()->withErrors('User sedang terpakai')->withInput();
+            }
+            else {
+                $pengguna->delete();
+                return redirect(route('user-index'));
+            }
+        }else{
+            return redirect()->back()->withErrors('Akun sedang terpakai')->withInput();
         }
     }
 

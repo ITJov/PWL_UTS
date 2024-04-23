@@ -170,12 +170,6 @@ a {
     font-size:20px;
 }
 
-
-.main-menu:hover,nav.main-menu.expanded {
-    width:250px;
-    overflow:visible;
-}
-
 .main-menu {
     background:#212121;
     border-right:1px solid #e5e5e5;
@@ -190,6 +184,11 @@ a {
     transition:width .05s linear;
     -webkit-transform:translateZ(0) scale(1,1);
     z-index:100;
+}
+
+.main-menu:hover,nav.main-menu.expanded {
+    width:250px;
+    overflow:visible;
 }
 
 .main-menu>ul {

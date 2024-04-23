@@ -20,34 +20,29 @@
 
     <!-- Main content -->
     <!-- Content area -->
-    <div class="container">
+    <div class="container bg-gradient-white shadow">
         <!-- Page heading -->
-        <h2 class="text-2xl font-semibold mb-4">Dashboard</h2>
-
+        <h2 class="text-2xl font-semibold mb-4 mt-4 p-4">Dashboard</h2>
         <!-- Dashboard content -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Card 1: Courses -->
-            <div class="bg-white shadow-sm rounded-md p-4">
-                <h3 class="text-lg font-semibold mb-2">My Courses</h3>
-                <p class="text-gray-600">You are currently enrolled in 5 courses.</p>
-            </div>
-
-            <!-- Card 2: Progress -->
-            <div class="bg-white shadow-sm rounded-md p-4">
-                <h3 class="text-lg font-semibold mb-2">Progress</h3>
-                <p class="text-gray-600">You have completed 60% of your courses.</p>
+            <div class="image d-flex justify-content-center mb-5">
+                <img src="https://blog-static.mamikos.com/wp-content/uploads/2018/12/Maranatha-Univ.jpg">
             </div>
 
             <!-- Card 3: Notifications -->
-            <div class="bg-white shadow-sm rounded-md p-4">
-                <h3 class="text-lg font-semibold mb-2">Notifications</h3>
-                <p class="text-gray-600">You have 3 new notifications.</p>
+            <div class="bg-gray shadow p-2 m-5 rounded text-center">
+                <h3 class="text-lg font-semibold mb-2">Visi</h3>
+                <p>Mengembangkan cendekiawan yang andal, suasana yang kondusif,
+                    dan nilai-nilai hidup kristiani sebagai upaya pengembangan ilmu pengetahuan, teknologi,
+                    dan seni dalam penyelenggaraan tridarma perguruan tinggi.</p>
             </div>
 
             <!-- Card 4: Achievements -->
-            <div class="bg-white shadow-sm rounded-md p-4">
-                <h3 class="text-lg font-semibold mb-2">Achievements</h3>
-                <p class="text-gray-600">You have earned 2 new achievements.</p>
+            <div class="bg-gray shadow p-2 m-5 rounded text-center">
+                <h3 class="text-lg font-semibold mb-2">Misi</h3>
+                <p class="text-gray-600">Mengembangkan cendekiawan yang andal,
+                    suasana yang kondusif, dan nilai-nilai hidup kristiani sebagai upaya pengembangan ilmu pengetahuan,
+                    teknologi, dan seni dalam penyelenggaraan tridarma perguruan tinggi.</p>
             </div>
         </div>
     </div>

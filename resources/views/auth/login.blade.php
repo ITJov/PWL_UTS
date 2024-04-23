@@ -4,7 +4,7 @@
 
     <div class="wrapper">
         <div class="logo">
-            <img width="400px" src="dist/img/marnat_lagi.png" alt="">
+            <img width="400px" src="{{asset('dist/img/marnat_lagi.png')}}" alt="">
         </div>
         <div class="text-center mt-4 name">
             MORNING
@@ -23,6 +23,7 @@
                 <x-text-input id="password" class="block mt-1 w-full"
                               type="password"
                               name="password"
+                              placeholder="Password"
                               required autocomplete="current-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>

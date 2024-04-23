@@ -31,6 +31,15 @@ class pollingDetailController extends Controller
         ]);
     }
 
+    public function indexProdi()
+    {
+        $data = PollingDetail::all();
+        return view('detailPolling.indexProdi', [
+            'poleDetails' => $data,
+            'kurikulums'=>kurikulum::all(),
+            'mks' => MataKuliah::all(),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -138,14 +147,19 @@ class pollingDetailController extends Controller
      */
     public function update(Request $request, PollingDetail $pollingDetail)
     {
+        if (!$pollingDetail) {
+            return redirect()->back()->withErrors('Polling detail tidak ditemukan')->withInput();
+        }
+
+        $pollingId = $pollingDetail->polling_id;
+
         $validateData = validator($request->all(), [
-            'id'=>'required',
-            'mk'=>'required',
+            'id' => 'required',
+            'mk' => 'required|array',
         ], [
-            'mk.required'=>'Mata Kuliah belum dipilih'
+            'mk.required' => 'Mata Kuliah belum dipilih'
         ])->validate();
 
-        $this->destroy($pollingDetail);
 
         $sks = 0;
         foreach ($request->mk as $data) {
@@ -155,23 +169,26 @@ class pollingDetailController extends Controller
             }
         }
 
-        $this->destroy($pollingDetail);
+        DB::table('polling_date')->where('id', $validateData['id'])->delete();
 
-        if($sks <= 9){
-            foreach ($validateData['mk'] as $data){
-                $poleDetail = new PollingDetail();
-                $poleDetail->id= $validateData['id'];
-                $poleDetail->polling_id = $pollingDetail->id;
-                $poleDetail->user_id=Auth::user()->id;
-                $poleDetail->mata_kuliah_id =$data;
-                $poleDetail -> save();
+        if ($sks <= 9) {
+            // Simpan polling detail
+            foreach ($validateData['mk'] as $data) {
+                $PollingDetail = new PollingDetail();
+                $PollingDetail->id = $validateData['id'];
+                $PollingDetail->polling_id = $pollingId;
+                $PollingDetail->user_id = Auth::user()->id;
+                $PollingDetail->mata_kuliah_id = $data;
+                $PollingDetail->save();
             }
-        }else{
+        } else {
+
             return redirect()->back()->withErrors('Jumlah SKS tidak boleh lebih dari 9 SKS')->withInput();
         }
 
         return redirect(route('poleDetail-index'));
     }
+
 
     /**
      * Remove the specified resource from storage.
