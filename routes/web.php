@@ -34,13 +34,13 @@ Route::get('/', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
 //Route::middleware('auth')->group(function () {
+//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//});
+
+Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('home');
     })->name('home');
@@ -50,9 +50,9 @@ Route::middleware('auth')->group(function () {
     })->name('unauthorized');
 
     Route::get("logout", [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-//});
+});
 
-//Route::middleware(['auth','userAkses:Admin'])->group(function () {
+Route::middleware(['auth','aksesAdmin'])->group(function () {
     //user
     Route::get("user", [userController::class, 'index'])->name('user-index');
     Route::get("user-create", [userController::class, 'create'])->name('userCreate');
@@ -60,8 +60,6 @@ Route::middleware('auth')->group(function () {
     Route::get('user-edit/{pengguna}', [userController::class, 'edit'])->name('user-edit');
     Route::post('user-edit/{pengguna}', [userController::class, 'update'])->name('user-update');
     Route::get('user-delete/{pengguna}', [userController::class, 'destroy'])->name('user-delete');
-    Route::get("addKurikulumUser/{pengguna}", [userController::class, 'addKurikulum'])->name('addKurikulumUser');
-    Route::post('addKurikulumUser/{pengguna}', [userController::class, 'storeKurikulum'])->name('storeKurikulum');
     // role
     Route::get("role", [roleController::class, 'index'])->name('role-index');
     Route::get("roleCreate", [roleController::class, 'create'])->name('roleCreate');
@@ -69,10 +67,9 @@ Route::middleware('auth')->group(function () {
     Route::get('role-edit/{role}', [roleController::class,'edit'])->name('role-edit');
     Route::post('role-edit/{role}', [roleController::class, 'update'])->name('role-update');
     Route::get('role-delete/{role}', [roleController::class, 'destroy'])->name('role-delete');
+});
 
-//});
-
-//Route::middleware(['auth','userAkses:Prodi,Admin'])->group(function () {
+Route::middleware(['auth','aksesProdi'])->group(function () {
     //kurikulum
     Route::get("kurikulum", [kurikulumController::class, 'index'])->name('kurikulum-index');
     Route::get("kurikulum-create", [kurikulumController::class, 'create'])->name('kurikulum-create');
@@ -88,8 +85,6 @@ Route::middleware('auth')->group(function () {
     Route::get('mk-edit/{mataKuliah}', [MataKuliahController::class, 'edit'])->name('mk-edit');
     Route::post('mk-edit/{mataKuliah}', [MataKuliahController::class, 'update'])->name('mk-update');
     Route::get('mk-delete/{mataKuliah}', [MataKuliahController::class, 'destroy'])->name('mk-delete');
-    Route::get("addKurikulumUser/{pengguna}", [userController::class, 'addKurikulum'])->name('addKurikulumUser');
-    Route::post('addKurikulumUser/{pengguna}', [userController::class, 'storeKurikulum'])->name('storeKurikulum');
 
     Route::get("pole", [pollingController::class, 'index'])->name('pole-index');
     Route::get("pole-create", [pollingController::class, 'create'])->name('pole-create');
@@ -97,17 +92,17 @@ Route::middleware('auth')->group(function () {
     Route::get('pole-edit/{polling}', [pollingController::class, 'edit'])->name('pole-edit');
     Route::post('pole-edit/{polling}', [pollingController::class, 'update'])->name('pole-update');
     Route::get('pole-delete/{polling}', [pollingController::class, 'destroy'])->name('pole-delete');
-//});
+    Route::get("poleDetailProdi", [pollingDetailController::class, 'index'])->name('poleDetailProdi-index');
+});
 
-//Route::middleware(['auth','userAkses:User'])->group(function () {
-//
-//});
+Route::middleware(['auth','aksesUser'])->group(function () {
+    Route::get("poleDetail", [pollingDetailController::class, 'index'])->name('poleDetail-index');
+    Route::get("poleDetail-create", [pollingDetailController::class, 'create'])->name('poleDetail-create');
+    Route::post("poleDetail-store", [pollingDetailController::class, 'store'])->name('poleDetail-store');
+    Route::get('poleDetail-edit/{pollingDetail}', [pollingDetailController::class, 'edit'])->name('poleDetail-edit');
+    Route::post('poleDetail-edit/{pollingDetail}', [pollingDetailController::class, 'update'])->name('poleDetail-update');
+    Route::get('poleDetail-delete/{pollingDetail}', [pollingDetailController::class, 'destroy'])->name('poleDetail-delete');
+});
 //polling
-Route::get("poleDetail", [pollingDetailController::class, 'index'])->name('poleDetail-index');
-Route::get("poleDetail-create", [pollingDetailController::class, 'create'])->name('poleDetail-create');
-Route::post("poleDetail-store", [pollingDetailController::class, 'store'])->name('poleDetail-store');
-Route::get('poleDetail-edit/{pollingDetail}', [pollingDetailController::class, 'edit'])->name('poleDetail-edit');
-Route::post('poleDetail-edit/{pollingDetail}', [pollingDetailController::class, 'update'])->name('poleDetail-update');
-Route::get('poleDetail-delete/{pollingDetail}', [pollingDetailController::class, 'destroy'])->name('poleDetail-delete');
 
 require __DIR__.'/auth.php';

@@ -1,19 +1,19 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
 <nav class="nav">
     <i class="uil uil-bars navOpenBtn"></i>
     <a href="#" class="logo">Morning</a>
 
-    <ul class="nav-links">
-        <i class="uil uil-times navCloseBtn"></i>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
-    </ul>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome Back, {{ auth()->user()->name }}
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="logout">Logout</a></li>
+            <li><hr class="dropdown-divider"></li>
+        </ul>
+    </li>
 
-    <i class="uil uil-search search-icon" id="searchIcon"></i>
-    <div class="search-box">
-        <i class="uil uil-search search-icon"></i>
-        <input type="text" placeholder="Search here..." />
-    </div>
+
 </nav>

@@ -9,3 +9,5 @@ php artisan make:model (namaModel) : nama dari model
 php artisan make:controller (namaRole) --model=(namaModel) : nama dari controller
 
 php artisan make migration (namaTabel)
+
+php artisan make:middleware (nama middleware)

@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\aksesAdmin;
+use App\Http\Middleware\aksesProdi;
+use App\Http\Middleware\aksesUser;
 use App\Http\Middleware\userAkses;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -65,6 +68,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'userAkses'=>userAkses::class,
+        'aksesAdmin'=>aksesAdmin::class,
+        'aksesProdi'=>aksesProdi::class,
+        'aksesUser'=>aksesUser::class,
     ];
 }

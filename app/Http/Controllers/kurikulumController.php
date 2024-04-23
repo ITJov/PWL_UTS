@@ -7,6 +7,8 @@ use App\Models\MataKuliah;
 use App\Models\role;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class kurikulumController extends Controller
@@ -16,6 +18,7 @@ class kurikulumController extends Controller
      */
     public function index()
     {
+
         $data = kurikulum::all();
         return view('kurikulum.index', [
             'kurikulums' => $data

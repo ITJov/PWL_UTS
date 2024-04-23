@@ -44,7 +44,7 @@
                             <td>{{$role->nama_role}}</td>
                             <td>
                                 <a href="{{ route('role-edit', ['role' =>$role->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
-                                <a href="{{ route('role-delete', ['role' =>$role->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
+                                <a id="deleteData" href="{{ route('role-delete', ['role' =>$role->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
                             </td>
                         </tr>
                     @endforeach

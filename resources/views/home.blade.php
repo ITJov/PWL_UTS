@@ -19,68 +19,39 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+    <!-- Content area -->
+    <div class="container">
+        <!-- Page heading -->
+        <h2 class="text-2xl font-semibold mb-4">Dashboard</h2>
 
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk of the card's
-                                content.
-                            </p>
-
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-
-                    <div class="card card-primary card-outline">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div><!-- /.card -->
-                </div>
-                <!-- /.col-md-6 -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="m-0">Featured</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Special title treatment</h6>
-
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h5 class="m-0">Featured</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Special title treatment</h6>
-
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-md-6 -->
+        <!-- Dashboard content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Card 1: Courses -->
+            <div class="bg-white shadow-sm rounded-md p-4">
+                <h3 class="text-lg font-semibold mb-2">My Courses</h3>
+                <p class="text-gray-600">You are currently enrolled in 5 courses.</p>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+
+            <!-- Card 2: Progress -->
+            <div class="bg-white shadow-sm rounded-md p-4">
+                <h3 class="text-lg font-semibold mb-2">Progress</h3>
+                <p class="text-gray-600">You have completed 60% of your courses.</p>
+            </div>
+
+            <!-- Card 3: Notifications -->
+            <div class="bg-white shadow-sm rounded-md p-4">
+                <h3 class="text-lg font-semibold mb-2">Notifications</h3>
+                <p class="text-gray-600">You have 3 new notifications.</p>
+            </div>
+
+            <!-- Card 4: Achievements -->
+            <div class="bg-white shadow-sm rounded-md p-4">
+                <h3 class="text-lg font-semibold mb-2">Achievements</h3>
+                <p class="text-gray-600">You have earned 2 new achievements.</p>
+            </div>
+        </div>
     </div>
+    <!-- /.row -->
     <!-- /.content -->
 @endsection
 

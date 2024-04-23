@@ -51,7 +51,7 @@
 {{--                            @if(Auth::user()->namaRole->nama_role=='Admin')--}}
                             <td>
                                 <a href="{{ route('user-edit', ['pengguna' =>$user->id]) }}" title="Edit"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true">Edit</i></button></a>
-                                <a href="{{ route('user-delete', ['pengguna' =>$user->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
+                                <a id="deleteData" href="{{ route('user-delete', ['pengguna' =>$user->id]) }}" title="Delete"><button class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true">Delete</i></button></a>
                             </td>
 {{--                            @endif--}}
                         </tr>

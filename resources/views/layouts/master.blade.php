@@ -61,8 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="{{ asset('js/alert.js') }}"></script>
+    <script src="{{ asset('dist/js/alert.js') }}"></script>
 @yield('spc-js')
 </body>
 </html>
